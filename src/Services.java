@@ -1,7 +1,8 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Services {
     
@@ -41,5 +42,49 @@ public class Services {
         PoliticalParty p = new PoliticalParty(Integer.parseInt(data[27]), data[28], Integer.parseInt(data[30]));
         election.parties.add(p);
         return p;
+    }
+
+    public static String[] dataFormatter(String line){
+        String[] currentData = line.split(";");
+        for(int i=0; i<currentData.length; i++){
+            currentData[i] = currentData[i].replaceAll("\"","");
+        }
+        return currentData;
+    }
+
+    public static void updateCandidates(Election election, String[] data, PoliticalParty party) throws Exception{
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date dtNsc = dateFormat.parse(data[42]);
+        Boolean situation = isElectedCandidate(data[56]);
+
+        election.candidates.add(new Candidate(Integer.parseInt(data[16]), data[18],
+        dtNsc, situation, Integer.parseInt(data[45]), party));
+    }
+
+    public static Boolean isElectedCandidate(String sit){
+        int situation = Integer.parseInt(sit);
+        if(situation == 2 || situation == 3)
+            return true;
+        return false;
+    }
+
+    public static void processCandidatesFile(BufferedReader bufferCandidates, Election election, int type) throws Exception{
+        String currentLine;
+        String[] currentData;
+        PoliticalParty party;
+        
+        bufferCandidates.readLine();    //Eliminando linha de legenda
+        while((currentLine = bufferCandidates.readLine()) != null){
+
+            // Formatando os dados
+            currentData = Services.dataFormatter(currentLine);
+            
+            // Atualizando lista de candidatos e partidos
+            if(Services.candidateIsValid(currentData[13], currentData[24], type)){
+                party = Services.updateParties(election, currentData);
+                Services.updateCandidates(election, currentData, party);
+            }
+        }
     }
 }
