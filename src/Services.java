@@ -33,14 +33,16 @@ public class Services {
 
     public static PoliticalParty updateParties(Election election, String[] data){
 
-        for(int x=0; x<election.parties.size(); x++){
-            if(election.parties.get(x).getNumber() == Integer.parseInt(data[27])){
-                return election.parties.get(x);
-            }   
+        int nrPartido = Integer.parseInt(data[27]);
+        String sgPartido = data[28];
+        int nrFederacao = Integer.parseInt(data[30]); 
+        
+        if(election.parties.containsKey(nrPartido)){
+            return election.parties.get(nrPartido);
         }
 
-        PoliticalParty p = new PoliticalParty(Integer.parseInt(data[27]), data[28], Integer.parseInt(data[30]));
-        election.parties.add(p);
+        PoliticalParty p = new PoliticalParty(nrPartido, sgPartido, nrFederacao);
+        election.parties.put(nrPartido, p);
         return p;
     }
 
@@ -57,9 +59,11 @@ public class Services {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date dtNsc = dateFormat.parse(data[42]);
         Boolean situation = isElectedCandidate(data[56]);
+        int nrCandidato = Integer.parseInt(data[16]);
+        String nmUrnaCandidato = data[18];
+        int cdGenero = Integer.parseInt(data[45]);
 
-        election.candidates.add(new Candidate(Integer.parseInt(data[16]), data[18],
-        dtNsc, situation, Integer.parseInt(data[45]), party));
+        election.candidates.put(nrCandidato, new Candidate(nrCandidato, nmUrnaCandidato, dtNsc, situation, cdGenero, party));
     }
 
     public static Boolean isElectedCandidate(String sit){

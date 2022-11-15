@@ -1,27 +1,11 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Election {
     
     // Estes dados poderão ser acessados diretamente somente pela classe Services
-    protected List<Candidate> candidates = new ArrayList<>();
-    protected List<PoliticalParty> parties = new ArrayList<>();
-    
-    //===================Getters===========================//
-    public List<PoliticalParty> getPoliticalParties() {
-        return new ArrayList<>(parties);
-    }
-    public List<Candidate> getCandidates() {
-        return new ArrayList<>(candidates);
-    }
-    
-    //==================Setters============================//
-    public void addCandidate(Candidate candidate){
-        this.candidates.add(candidate);
-    }
-    public void addParty(PoliticalParty party){
-        this.parties.add(party);
-    }
-}
+    protected Map<Integer, Candidate> candidates = new HashMap<>();
+    protected Map<Integer, PoliticalParty> parties = new HashMap<>();
 
-// Analisar a possibilidade de substituir o ArrayList por um TreeMap
+    //Aqui ficarão os métodos que retornarão as estatísticas das eleições
+}   

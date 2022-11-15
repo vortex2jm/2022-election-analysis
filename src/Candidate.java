@@ -22,26 +22,24 @@ public class Candidate implements Comparable<Candidate>{
         this.qtVotos = 0;
     }
 
+    //Implementar getters e setters
 
     //===============Setters================================================//
     public void setQtVotos(int qtVotos) {
         this.qtVotos = qtVotos;
     }
 
+    //===============Getters================================================//
+    public int getNrCandidato() {
+        return nrCandidato;
+    }
 
-    
-
-
-
-    //==============================Override methods========================//
-    //@Override
-    //public String toString() {
-    //    return votingName + " (" + candidateParty.getName() + ", " + candidateVotes + " votos)\n";
-    //}
 
     @Override
     public int compareTo(Candidate o) {
-        // TODO Auto-generated method stub
+        
+        //Implementar parâmetros de comparação
+
         return 0;
     }
 }

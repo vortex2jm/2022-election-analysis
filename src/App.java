@@ -6,7 +6,7 @@ public class App {
 
         int type = Services.validateArgs(args[0]);
         BufferedReader bufferCandidates = Services.createBuffer(args[1]);
-        BufferedReader bufferParties = Services.createBuffer(args[2]);
+        //BufferedReader bufferParties = Services.createBuffer(args[2]);
 
         Election election2022 = new Election();
 
@@ -26,7 +26,7 @@ public class App {
 // nmUrnaCandidato; 18
 // dtNascimento; 42
 // cdSitTotTurno;  56
-// cdGenero;  4
+// cdGenero;  45
 
 //====== Referentes ao arquivo de partidos
 // cdCargoPart;
