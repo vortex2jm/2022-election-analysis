@@ -1,19 +1,14 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class PoliticalParty {
 
   private String sg;
   private int legendVotes;
-  private List<Candidate> candidatesList;
   private int federation;
   private int number;
-
-  public int getNumber() {
-    return number;
-  }
-
+  private List<Candidate> candidatesList;
+  
   public PoliticalParty(int number, String sg, int federation) {
     this.number = number;
     this.sg = sg;
@@ -21,27 +16,28 @@ public class PoliticalParty {
     this.candidatesList = new ArrayList<>();
   }
 
-  //========================================================//
+  //======================Getters==================================//
   public String getSg() {
     return sg;
   }
-
-  //========================================================//
   public int getLegendVotes() {
     return legendVotes;
   }
-
-  public void setLegendVotes(int legendVotes) {
-    this.legendVotes += legendVotes;
+  public int getFederation() {
+    return federation;
   }
-
-  //========================================================//  
-  public Collection<Candidate> getCandidatesList() {
+  public int getNumber() {
+    return number;
+  }
+  public List<Candidate> getCandidatesList() {
     return new ArrayList<>(this.candidatesList);
   }
 
-  public void setCandidatesList(List<Candidate> candidatesList) {
-    this.candidatesList = candidatesList;
+  //======================Setters==================================//
+  public void setLegendVotes(int legendVotes) {
+    this.legendVotes += legendVotes;
   }
-  
+  public void setCandidatesList(Candidate candidate) {
+    this.candidatesList.add(candidate);
+  }   
 }
