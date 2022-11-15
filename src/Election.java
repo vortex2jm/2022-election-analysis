@@ -22,5 +22,6 @@ public class Election {
     public void addParty(PoliticalParty party){
         this.parties.add(party);
     }
-
 }
+
+// Analisar a possibilidade de substituir o ArrayList por um TreeMap
