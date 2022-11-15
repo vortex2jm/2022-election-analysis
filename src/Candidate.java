@@ -9,6 +9,7 @@ public class Candidate implements Comparable<Candidate>{
     private int cdGenero;
     private PoliticalParty party;
     private int qtVotos;
+    private int position;
 
     public Candidate(int nrCandidato, String nmUrnaCandidato, Date dtNascimento,
      Boolean cdSitTotTurno, int cdGenero, PoliticalParty party){
@@ -31,6 +32,9 @@ public class Candidate implements Comparable<Candidate>{
     public void setQtVotos(int qtVotos) {
         this.qtVotos += qtVotos;
     }
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     //===============Getters================================================//
     public int getNrCandidato() {
@@ -48,6 +52,10 @@ public class Candidate implements Comparable<Candidate>{
     public int getCdGenero() {
         return cdGenero;
     }
+    public int getPosition() {
+        return position;
+    }
+
     //==============Override================================================//
     @Override
     public int compareTo(Candidate o) {
