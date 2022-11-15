@@ -84,7 +84,7 @@ public class Services {
         return false;
     }
 
-    public static void processCandidatesFile(BufferedReader bufferCandidates, Election election, int type)
+    public static void processCandidatesFile(BufferedReader bufferCandidates, Election election)
             throws Exception {
         String currentLine;
         String[] currentData;
@@ -97,14 +97,14 @@ public class Services {
             currentData = Services.dataFormatter(currentLine);
 
             // Atualizando lista de candidatos e partidos
-            if (Services.candidateIsValid(currentData[13], currentData[24], type)) {
+            if (Services.candidateIsValid(currentData[13], currentData[24], election.getType())) {
                 party = Services.updateParties(election, currentData);
                 Services.updateCandidates(election, currentData, party);
             }
         }
     }
 
-    public static void processVotesFile(BufferedReader bufferVotes, Election election, int type) throws Exception {
+    public static void processVotesFile(BufferedReader bufferVotes, Election election) throws Exception {
 
         String currentLine;
         String[] currentData;
@@ -114,7 +114,7 @@ public class Services {
 
             currentData = dataFormatter(currentLine);
 
-            if(candidateIsValid(currentData[17], type, currentData[19])){
+            if(candidateIsValid(currentData[17], election.getType(), currentData[19])){
                 processCandidatesVotes(election, currentData);
             }
         }
@@ -134,5 +134,58 @@ public class Services {
             election.parties.get(nrVotavel).setLegendVotes(qtVotos);
             election.setLegendVotes(qtVotos);
         }       
+    }
+
+    public static void generateReports(Election election){
+
+        System.out.println("Número de vagas: "+election.electedAmount());
+        System.out.print("\n");
+        
+        //===============================================================//
+        String category="";
+        if(election.getType() == 6)
+            category = "federais";
+        else if(election.getType() == 7)
+            category = "estaduais";
+        System.out.printf("Deputados %s eleitos:\n", category);
+        
+        //===============================================================//
+        for(Candidate c: election.electedCandidates()){
+            System.out.printf("%d - ",c.getPosition());
+            System.out.println(c);
+        }
+        System.out.print("\n");
+        
+        //===============================================================//
+        System.out.println("Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):");
+        for(Candidate c: election.getBestCandidates()){
+            System.out.printf("%d - ", c.getPosition());
+            System.out.println(c);
+        }
+        System.out.print("\n");
+
+        //===============================================================//
+        System.out.println("Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:");
+        System.out.println("(com sua posição no ranking de mais votados)");
+        for(Candidate c: election.electedIfMajorElection()){
+            System.out.printf("%d - ", c.getPosition());
+            System.out.println(c);
+        }
+        System.out.print("\n");
+
+        //===============================================================//
+        System.out.println("Eleitos, que se beneficiaram do sistema proporcional:");
+        System.out.println("(com sua posição no ranking de mais votados)");
+        for(Candidate c: election.electedByProportional()){
+            System.out.printf("%d - ", c.getPosition());
+            System.out.println(c);
+        }
+        System.out.print("\n");
+
+        //===============================================================//
+        
+        // Linkar candidato na lista de partido e atualizar os votos do partido
+        // Criar funções do partido
+        // Adicionar função de faixa etária por data via argumentos
     }
 }
