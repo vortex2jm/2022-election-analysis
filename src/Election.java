@@ -101,4 +101,13 @@ public class Election {
         elctdProp.sort(null);
         return elctdProp;
     }
+
+    public List<PoliticalParty> getParties(){
+        var p = new ArrayList<PoliticalParty>(parties.values());
+        p.sort(null);
+        for(int i=0; i<p.size(); i++){
+            p.get(i).setPosition(i+1);
+        }        
+        return p;
+    }
 }   

@@ -72,9 +72,9 @@ public class Services {
         String nmUrnaCandidato = data[18];
         int cdGenero = Integer.parseInt(data[45]);
 
-        election.candidates.put(nrCandidato,
-                new Candidate(nrCandidato, nmUrnaCandidato, dtNsc, situation, cdGenero, party));
-        
+        Candidate cand = new Candidate(nrCandidato, nmUrnaCandidato, dtNsc, situation, cdGenero, party); 
+        election.candidates.put(nrCandidato, cand);
+        party.setCandidatesList(cand);
     }
 
     public static Boolean isElectedCandidate(String sit) {
@@ -183,6 +183,13 @@ public class Services {
         System.out.print("\n");
 
         //===============================================================//
+        System.out.println("Votação dos partidos e número de candidatos eleitos:");
+        for(PoliticalParty p: election.getParties()){
+            System.out.printf("%d - %s - %d, %d votos (%d nominais e %d de legenda), %d candidatos eleitos\n",
+            p.getPosition(), p.getSg(), p.getNumber(), p.getTotalVotes(),
+             p.getNominalVotes(), p.getLegendVotes(), p.getElectedAmount());
+        }
+        System.out.print("\n");
         
         // Linkar candidato na lista de partido e atualizar os votos do partido
         // Criar funções do partido
