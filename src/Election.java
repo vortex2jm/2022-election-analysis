@@ -12,6 +12,12 @@ public class Election {
 
     private int nominalVotes = 0;
     private int legendVotes = 0;
+
+    private int type;
+
+    public Election(int type){
+        this.type = type;
+    }
     
     //==============Getters======================//
     public int getNominalVotes() {
@@ -19,6 +25,9 @@ public class Election {
     }
     public int getLegendVotes() {
         return legendVotes;
+    }
+    public int getType() {
+        return type;
     }
 
     //==============Setters======================//
@@ -49,6 +58,47 @@ public class Election {
             }
         }
         result.sort(null);
+        for(int i=0; i<result.size(); i++){
+            result.get(i).setPosition(i+1);
+        }
         return result;
+    }
+
+    public List<Candidate> getAllCandidates(){
+        var c = new ArrayList<Candidate>(candidates.values());
+        c.sort(null);
+        for(int i=0; i<c.size(); i++){
+            c.get(i).setPosition(i+1);
+        }
+        return c;
+    }
+
+    public List<Candidate> getBestCandidates(){
+        var c = new ArrayList<Candidate>();
+        for(int i=0; i<electedAmount(); i++){
+            c.add(getAllCandidates().get(i));
+        }
+        c.sort(null);
+        return c;
+    }
+
+    public List<Candidate> electedIfMajorElection(){
+        var mjEl = new ArrayList<Candidate>();
+        for(Candidate c: getBestCandidates()){
+            if(!electedCandidates().contains(c))
+                mjEl.add(c);
+        }
+        mjEl.sort(null);
+        return mjEl;
+    }
+
+    public List<Candidate> electedByProportional(){
+        var elctdProp = new ArrayList<Candidate>();
+        for(Candidate c: electedCandidates()){
+            if(!getBestCandidates().contains(c))
+                elctdProp.add(c);
+        }
+        elctdProp.sort(null);
+        return elctdProp;
     }
 }   
