@@ -14,32 +14,57 @@ public class Candidate implements Comparable<Candidate>{
      Boolean cdSitTotTurno, int cdGenero, PoliticalParty party){
 
         this.nrCandidato = nrCandidato;
-        this.nmUrnaCandidato = nmUrnaCandidato;
         this.dtNascimento = dtNascimento;
         this.cdSitTotTurno = cdSitTotTurno;
         this.cdGenero = cdGenero;
         this.party = party;
         this.qtVotos = 0;
-    }
 
-    //Implementar getters e setters
+        if(this.party.getFederation() != -1){
+            this.nmUrnaCandidato = "*" + nmUrnaCandidato;
+            return;
+        }
+        this.nmUrnaCandidato = nmUrnaCandidato;
+    }
 
     //===============Setters================================================//
     public void setQtVotos(int qtVotos) {
-        this.qtVotos = qtVotos;
+        this.qtVotos += qtVotos;
     }
 
     //===============Getters================================================//
     public int getNrCandidato() {
         return nrCandidato;
     }
-
-
+    public Boolean getCdSitTotTurno() {
+        return cdSitTotTurno;
+    }
+    public int getQtVotos() {
+        return qtVotos;
+    }
+    public Date getDtNascimento() {
+        return dtNascimento;
+    }
+    public int getCdGenero() {
+        return cdGenero;
+    }
+    //==============Override================================================//
     @Override
     public int compareTo(Candidate o) {
-        
-        //Implementar parâmetros de comparação
-
+        if(this.qtVotos < o.getQtVotos())
+            return 1;
+        if(this.qtVotos > o.getQtVotos())
+            return -1;
+        if(this.dtNascimento.compareTo(o.getDtNascimento()) < 0)
+            return -1;
+        if(this.dtNascimento.compareTo(o.getDtNascimento()) > 0){
+            return 1;
+        }
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return this.nmUrnaCandidato + " (" + this.party.getSg() + ", " + this.qtVotos + " votos)";
     }
 }
