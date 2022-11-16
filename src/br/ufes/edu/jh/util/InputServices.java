@@ -1,4 +1,4 @@
-package br.ufes.edu.jh.util.processing;
+package br.ufes.edu.jh.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,15 +9,7 @@ import br.ufes.edu.jh.domain.Candidate;
 import br.ufes.edu.jh.domain.Election;
 import br.ufes.edu.jh.domain.PoliticalParty;
 
-public class Services {
-
-    public static int validateArgs(String args) throws Exception {
-        if (args.compareTo("--estadual") == 0)
-            return 7;
-        if (args.compareTo("--federal") == 0)
-            return 6;
-        throw new Exception("Argumento inválido");
-    }
+public class InputServices {
 
     public static BufferedReader createBuffer(String args) throws Exception {
         try {
@@ -99,12 +91,12 @@ public class Services {
         while ((currentLine = bufferCandidates.readLine()) != null) {
 
             // Formatando os dados
-            currentData = Services.dataFormatter(currentLine);
+            currentData = InputServices.dataFormatter(currentLine);
 
             // Atualizando lista de candidatos e partidos
-            if (Services.candidateIsValid(currentData[13], currentData[24], election.getType())) {
-                party = Services.updateParties(election, currentData);
-                Services.updateCandidates(election, currentData, party);
+            if (InputServices.candidateIsValid(currentData[13], currentData[24], election.getType())) {
+                party = InputServices.updateParties(election, currentData);
+                InputServices.updateCandidates(election, currentData, party);
             }
         }
     }
@@ -139,69 +131,5 @@ public class Services {
             election.getPartiesMap().get(nrVotavel).setLegendVotes(qtVotos);
             election.setLegendVotes(qtVotos);
         }       
-    }
-
-    public static void generateReports(Election election){
-
-        System.out.println("Número de vagas: "+election.electedAmount());
-        System.out.print("\n");
-        
-        //===============================================================//
-        String category="";
-        if(election.getType() == 6)
-            category = "federais";
-        else if(election.getType() == 7)
-            category = "estaduais";
-        System.out.printf("Deputados %s eleitos:\n", category);
-        
-        //===============================================================//
-        for(Candidate c: election.electedCandidates()){
-            System.out.printf("%d - ",c.getPosition());
-            System.out.println(c);
-        }
-        System.out.print("\n");
-        
-        //===============================================================//
-        System.out.println("Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):");
-        for(Candidate c: election.getBestCandidates()){
-            System.out.printf("%d - ", c.getPosition());
-            System.out.println(c);
-        }
-        System.out.print("\n");
-
-        //===============================================================//
-        System.out.println("Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:");
-        System.out.println("(com sua posição no ranking de mais votados)");
-        for(Candidate c: election.electedIfMajorElection()){
-            System.out.printf("%d - ", c.getPosition());
-            System.out.println(c);
-        }
-        System.out.print("\n");
-
-        //===============================================================//
-        System.out.println("Eleitos, que se beneficiaram do sistema proporcional:");
-        System.out.println("(com sua posição no ranking de mais votados)");
-        for(Candidate c: election.electedByProportional()){
-            System.out.printf("%d - ", c.getPosition());
-            System.out.println(c);
-        }
-        System.out.print("\n");
-
-        //===============================================================//
-        System.out.println("Votação dos partidos e número de candidatos eleitos:");
-        for(PoliticalParty p: election.getParties()){
-            System.out.printf("%d - %s - %d, %d votos (%d nominais e %d de legenda), %d candidatos eleitos\n",
-            p.getPosition(), p.getSg(), p.getNumber(), p.getTotalVotes(),
-             p.getNominalVotes(), p.getLegendVotes(), p.getElectedAmount());
-        }
-        System.out.print("\n");
-        
-        // Linkar candidato na lista de partido e atualizar os votos do partido
-        // Criar funções do partido
-        // Adicionar função de faixa etária por data via argumentos
-
-        //Desacoplar serviço de geração de reports e de validação de argumentos
-        //Validação de argumentos vai para a classe App
-        //Geração de reports vai para outra classe util
     }
 }
