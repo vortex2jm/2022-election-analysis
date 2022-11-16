@@ -6,14 +6,14 @@ public class Candidate implements Comparable<Candidate>{
     private int nrCandidato;
     private String nmUrnaCandidato;
     private Date dtNascimento;
-    private Boolean cdSitTotTurno;
+    private boolean cdSitTotTurno;
     private int cdGenero;
     private PoliticalParty party;
     private int qtVotos;
     private int position;
 
     public Candidate(int nrCandidato, String nmUrnaCandidato, Date dtNascimento,
-     Boolean cdSitTotTurno, int cdGenero, PoliticalParty party){
+     boolean cdSitTotTurno, int cdGenero, PoliticalParty party){
 
         this.nrCandidato = nrCandidato;
         this.dtNascimento = dtNascimento;
@@ -41,7 +41,7 @@ public class Candidate implements Comparable<Candidate>{
     public int getNrCandidato() {
         return nrCandidato;
     }
-    public Boolean getCdSitTotTurno() {
+    public boolean getCdSitTotTurno() {
         return cdSitTotTurno;
     }
     public int getQtVotos() {

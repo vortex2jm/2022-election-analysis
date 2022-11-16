@@ -28,7 +28,7 @@ public class Services {
         }
     }
 
-    public static Boolean candidateIsValid(String cdCargo, String cdDetalhesSituacaoCand, int type) {
+    public static boolean candidateIsValid(String cdCargo, String cdDetalhesSituacaoCand, int type) {
         int cdC = Integer.parseInt(cdCargo);
         int cdD = Integer.parseInt(cdDetalhesSituacaoCand);
         if (cdC == type && (cdD == 2 || cdD == 16))
@@ -37,7 +37,7 @@ public class Services {
     }
 
     //Overload
-    public static Boolean candidateIsValid(String cdCargo, int type, String nrVotavel){
+    public static boolean candidateIsValid(String cdCargo, int type, String nrVotavel){
         int cdC = Integer.parseInt(cdCargo);
         int nrV = Integer.parseInt(nrVotavel);
         if(cdC == type && nrV != 95 && nrV != 96 && nrV != 97 && nrV != 98)
@@ -72,7 +72,7 @@ public class Services {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date dtNsc = dateFormat.parse(data[42]);
-        Boolean situation = isElectedCandidate(data[56]);
+        boolean situation = isElectedCandidate(data[56]);
         int nrCandidato = Integer.parseInt(data[16]);
         String nmUrnaCandidato = data[18];
         int cdGenero = Integer.parseInt(data[45]);
@@ -82,7 +82,7 @@ public class Services {
         party.setCandidatesList(cand);
     }
 
-    public static Boolean isElectedCandidate(String sit) {
+    public static boolean isElectedCandidate(String sit) {
         int situation = Integer.parseInt(sit);
         if (situation == 2 || situation == 3)
             return true;
@@ -199,5 +199,9 @@ public class Services {
         // Linkar candidato na lista de partido e atualizar os votos do partido
         // Criar funções do partido
         // Adicionar função de faixa etária por data via argumentos
+
+        //Desacoplar serviço de geração de reports e de validação de argumentos
+        //Validação de argumentos vai para a classe App
+        //Geração de reports vai para outra classe util
     }
 }
