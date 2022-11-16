@@ -1,3 +1,4 @@
+package br.ufes.edu.jh.domain;
 import java.util.Date;
 
 public class Candidate implements Comparable<Candidate>{

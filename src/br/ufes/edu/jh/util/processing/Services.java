@@ -1,8 +1,13 @@
+package br.ufes.edu.jh.util.processing;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import br.ufes.edu.jh.domain.Candidate;
+import br.ufes.edu.jh.domain.Election;
+import br.ufes.edu.jh.domain.PoliticalParty;
 
 public class Services {
 
@@ -46,12 +51,12 @@ public class Services {
         String sgPartido = data[28];
         int nrFederacao = Integer.parseInt(data[30]);
 
-        if (election.parties.containsKey(nrPartido)) {
-            return election.parties.get(nrPartido);
+        if (election.getPartiesMap().containsKey(nrPartido)) {
+            return election.getPartiesMap().get(nrPartido);
         }
 
         PoliticalParty p = new PoliticalParty(nrPartido, sgPartido, nrFederacao);
-        election.parties.put(nrPartido, p);
+        election.addPartie(nrPartido, p);
         return p;
     }
 
@@ -73,7 +78,7 @@ public class Services {
         int cdGenero = Integer.parseInt(data[45]);
 
         Candidate cand = new Candidate(nrCandidato, nmUrnaCandidato, dtNsc, situation, cdGenero, party); 
-        election.candidates.put(nrCandidato, cand);
+        election.addCandidate(nrCandidato, cand);
         party.setCandidatesList(cand);
     }
 
@@ -125,13 +130,13 @@ public class Services {
         int nrVotavel = Integer.parseInt(data[19]);
         int qtVotos = Integer.parseInt(data[21]);
 
-        if(election.candidates.containsKey(nrVotavel)){
-            election.candidates.get(nrVotavel).setQtVotos(qtVotos);
+        if(election.getCandidatesMap().containsKey(nrVotavel)){
+            election.getCandidatesMap().get(nrVotavel).setQtVotos(qtVotos);
             election.setNominalVotes(qtVotos);
             return;
         }
-        if(election.parties.containsKey(nrVotavel)){
-            election.parties.get(nrVotavel).setLegendVotes(qtVotos);
+        if(election.getPartiesMap().containsKey(nrVotavel)){
+            election.getPartiesMap().get(nrVotavel).setLegendVotes(qtVotos);
             election.setLegendVotes(qtVotos);
         }       
     }

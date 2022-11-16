@@ -1,3 +1,4 @@
+package br.ufes.edu.jh.domain;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +8,8 @@ public class Election {
     
     // Separar os packages posteriormente
     // Estes dados poderão ser acessados diretamente somente pela classe Services
-    protected Map<Integer, Candidate> candidates = new HashMap<>();
-    protected Map<Integer, PoliticalParty> parties = new HashMap<>();
+    private Map<Integer, Candidate> candidates = new HashMap<>();
+    private Map<Integer, PoliticalParty> parties = new HashMap<>();
 
     private int nominalVotes = 0;
     private int legendVotes = 0;
@@ -29,6 +30,12 @@ public class Election {
     public int getType() {
         return type;
     }
+    public Map<Integer, Candidate> getCandidatesMap() {
+        return candidates;
+    }
+    public Map<Integer, PoliticalParty> getPartiesMap(){
+        return parties;
+    }
 
     //==============Setters======================//
     public void setNominalVotes(int nominalVotes) {
@@ -36,6 +43,12 @@ public class Election {
     }
     public void setLegendVotes(int legendVotes) {
         this.legendVotes += legendVotes;
+    }
+    public void addCandidate(int key, Candidate value) {
+        this.candidates.put(key, value);
+    }
+    public void addPartie(int key, PoliticalParty value) {
+        this.parties.put(key, value);
     }
 
     //========================================================================//
