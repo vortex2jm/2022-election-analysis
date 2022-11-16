@@ -21,11 +21,7 @@ public class Candidate implements Comparable<Candidate>{
         this.cdGenero = cdGenero;
         this.party = party;
         this.qtVotos = 0;
-
-        if(this.party.getFederation() != -1){
-            this.nmUrnaCandidato = "*" + nmUrnaCandidato;
-            return;
-        }
+        this.nmUrnaCandidato = nmUrnaCandidato;
         this.nmUrnaCandidato = nmUrnaCandidato;
     }
 
@@ -55,6 +51,12 @@ public class Candidate implements Comparable<Candidate>{
     }
     public int getPosition() {
         return position;
+    }
+    public PoliticalParty getParty() {
+        return party;
+    }
+    public String getNmUrnaCandidato() {
+        return nmUrnaCandidato;
     }
 
     //==============Override================================================//

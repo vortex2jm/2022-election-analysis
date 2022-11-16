@@ -2,8 +2,8 @@ package br.ufes.edu.jh;
 import java.io.BufferedReader;
 
 import br.ufes.edu.jh.domain.Election;
-import br.ufes.edu.jh.util.InputServices;
-import br.ufes.edu.jh.util.OutputServices;
+import br.ufes.edu.jh.util.io.InputServices;
+import br.ufes.edu.jh.util.io.OutputServices;
 
 public class App {
     public static void main(String[] args) throws Exception {

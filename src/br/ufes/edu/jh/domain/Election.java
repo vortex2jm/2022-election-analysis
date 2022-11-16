@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.ufes.edu.jh.util.comparators.PartyComparatorByCandidate;
+
 public class Election {
     
     // Separar os packages posteriormente
@@ -122,5 +124,19 @@ public class Election {
             p.get(i).setPosition(i+1);
         }        
         return p;
+    }
+
+    public List<PoliticalParty> getPartiesOrderedByCandidates(){
+        var pList = new ArrayList<PoliticalParty>();
+        for(PoliticalParty p: getParties()){
+            if(p.getTotalVotes() > 0){
+                pList.add(p);
+            }
+        }
+        pList.sort(new PartyComparatorByCandidate());
+        for(int i=0; i<pList.size(); i++){
+            pList.get(i).setPosition(i+1);
+        } 
+        return pList;
     }
 }   

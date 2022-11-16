@@ -57,6 +57,16 @@ public class PoliticalParty implements Comparable<PoliticalParty>{
   public int getTotalVotes(){
     return this.legendVotes + getNominalVotes();
   }
+  public Candidate mostVotedCandidate(){
+    var list = new ArrayList<Candidate>(this.candidatesList);
+    list.sort(null);
+    return list.get(0);
+  }
+  public Candidate leastVotedCandidate(){
+    var list = new ArrayList<Candidate>(this.candidatesList);
+    list.sort(null);
+    return list.get(list.size() - 1);
+  }
 
   //======================Setters==================================//
   public void setLegendVotes(int legendVotes) {

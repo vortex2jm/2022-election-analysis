@@ -1,4 +1,4 @@
-package br.ufes.edu.jh.util;
+package br.ufes.edu.jh.util.io;
 
 import br.ufes.edu.jh.domain.Candidate;
 import br.ufes.edu.jh.domain.Election;
@@ -18,10 +18,10 @@ public class OutputServices {
         else if(election.getType() == 7)
             category = "estaduais";
         System.out.printf("Deputados %s eleitos:\n", category);
-        
-        //===============================================================//
         for(Candidate c: election.electedCandidates()){
             System.out.printf("%d - ",c.getPosition());
+            if(c.getParty().getFederation() != -1)
+                System.out.print("*");
             System.out.println(c);
         }
         System.out.print("\n");
@@ -57,10 +57,19 @@ public class OutputServices {
         for(PoliticalParty p: election.getParties()){
             System.out.printf("%d - %s - %d, %d votos (%d nominais e %d de legenda), %d candidatos eleitos\n",
             p.getPosition(), p.getSg(), p.getNumber(), p.getTotalVotes(),
-             p.getNominalVotes(), p.getLegendVotes(), p.getElectedAmount());
+            p.getNominalVotes(), p.getLegendVotes(), p.getElectedAmount());
         }
         System.out.print("\n");
         
+        //===============================================================//
+        System.out.println("Primeiro e último colocados de cada partido:");
+        for(PoliticalParty p: election.getPartiesOrderedByCandidates()){
+            System.out.printf("%d - %s - %d, %s (%d, %d votos) / %s (%d, %d votos)\n",
+            p.getPosition(), p.getSg(), p.getNumber(), p.mostVotedCandidate().getNmUrnaCandidato(), 
+            p.mostVotedCandidate().getNrCandidato(), p.mostVotedCandidate().getQtVotos(),
+            p.leastVotedCandidate().getNmUrnaCandidato(), p.leastVotedCandidate().getNrCandidato(),
+            p.leastVotedCandidate().getQtVotos());
+        }
         // Adicionar função de faixa etária por data via argumentos
     }
 }
