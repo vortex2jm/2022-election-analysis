@@ -100,8 +100,9 @@ public class InputServices {
             currentData = InputServices.dataFormatter(currentLine);
 
             // Atualizando lista de candidatos e partidos
+            party = InputServices.updateParties(election, currentData);
+            
             if (InputServices.candidateIsValid(currentData[13], currentData[24], election.getType())) {
-                party = InputServices.updateParties(election, currentData);
                 InputServices.updateCandidates(election, currentData, party);
             }
         }

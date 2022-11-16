@@ -134,9 +134,8 @@ public class Election {
     public List<PoliticalParty> getPartiesOrderedByCandidates(){
         var pList = new ArrayList<PoliticalParty>();
         for(PoliticalParty p: getParties()){
-            if(p.getTotalVotes() > 0){
+            if(p.getTotalVotes() > 0)
                 pList.add(p);
-            }
         }
         pList.sort(new PartyComparatorByCandidate());
         for(int i=0; i<pList.size(); i++){
@@ -150,7 +149,7 @@ public class Election {
         long diff=0;
         for(Candidate c: electedCandidates()){
             diff = c.getDtNascimento().until(this.currentDate, ChronoUnit.YEARS);
-            if(diff >= start && diff <= end)
+            if(diff >= start && diff < end)
                 total++;
         }
         return total;
