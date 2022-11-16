@@ -2,8 +2,7 @@ package br.ufes.edu.jh.util.io;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
 import br.ufes.edu.jh.domain.Candidate;
 import br.ufes.edu.jh.domain.Election;
@@ -62,8 +61,15 @@ public class InputServices {
 
     public static void updateCandidates(Election election, String[] data, PoliticalParty party) throws Exception {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date dtNsc = dateFormat.parse(data[42]);
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        //Date dtNsc = dateFormat.parse(data[42]);
+
+        String[] date = data[42].split("/");
+        int day = Integer.parseInt(date[0]);
+        int month = Integer.parseInt(date[1]);
+        int year = Integer.parseInt(date[2]);
+        LocalDate dtNsc = LocalDate.of(year, month, day);
+
         boolean situation = isElectedCandidate(data[56]);
         int nrCandidato = Integer.parseInt(data[16]);
         String nmUrnaCandidato = data[18];

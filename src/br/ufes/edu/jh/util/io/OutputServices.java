@@ -70,6 +70,51 @@ public class OutputServices {
             p.leastVotedCandidate().getNmUrnaCandidato(), p.leastVotedCandidate().getNrCandidato(),
             p.leastVotedCandidate().getQtVotos());
         }
-        // Adicionar função de faixa etária por data via argumentos
+        System.out.print("\n");
+
+        //===============================================================//
+        System.out.println("Eleitos, por faixa etária (na data da eleição):");
+        int totalElected = election.electedAmount();
+        
+        int f1 = election.electedAmountByAge(0, 30);
+        int f2 = election.electedAmountByAge(30, 40);
+        int f3 = election.electedAmountByAge(40, 50);
+        int f4 = election.electedAmountByAge(50, 60);
+        int f5 = election.electedAmountByAge(60, 120);
+
+        float p1 = ((float)f1 / (float)totalElected)*100;
+        float p2 = ((float)f2 / (float)totalElected)*100;
+        float p3 = ((float)f3 / (float)totalElected)*100;
+        float p4 = ((float)f4 / (float)totalElected)*100;
+        float p5 = ((float)f5 / (float)totalElected)*100;
+
+        System.out.printf("      Idade < 30: %d (%.2f%%)\n", f1, p1);
+        System.out.printf("30 <= Idade < 40: %d (%.2f%%)\n", f1, p2);
+        System.out.printf("40 <= Idade < 50: %d (%.2f%%)\n", f3, p3);
+        System.out.printf("50 <= Idade < 60: %d (%.2f%%)\n", f4, p4);
+        System.out.printf("60 <= Idade     : %d (%.2f%%)\n\n", f5, p5);
+
+        //===============================================================//
+        System.out.println("Eleitos, por gênero:");
+        int men = election.electedMen();
+        int women = election.electedWomen();
+
+        float pmen = ((float)men/(float)totalElected)*100;
+        float pwomen = ((float)women/(float)totalElected)*100;
+
+        System.out.printf("Feminino: %d (%.2f%%)\n", women, pwomen);
+        System.out.printf("Masculino: %d (%.2f%%)\n", men, pmen);
+
+        //===============================================================//
+        int validVotes = election.getLegendVotes() + election.getNominalVotes();
+        int nominal = election.getNominalVotes();
+        int legend = election.getLegendVotes();
+
+        float pNominal = ((float)nominal/(float)validVotes) * 100;
+        float pLegend = ((float)legend/(float)validVotes) * 100;
+
+        System.out.printf("Total de votos válidos:    %d\n", validVotes);
+        System.out.printf("Total de votos nominais:   %d (%.2f%%)\n", nominal, pNominal);
+        System.out.printf("Total de votos de legenda: %d (%.2f%%)\n", legend, pLegend);
     }
 }

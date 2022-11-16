@@ -1,4 +1,6 @@
 package br.ufes.edu.jh.domain;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,8 +10,6 @@ import br.ufes.edu.jh.util.comparators.PartyComparatorByCandidate;
 
 public class Election {
     
-    // Separar os packages posteriormente
-    // Estes dados poderão ser acessados diretamente somente pela classe Services
     private Map<Integer, Candidate> candidates = new HashMap<>();
     private Map<Integer, PoliticalParty> parties = new HashMap<>();
 
@@ -17,9 +17,11 @@ public class Election {
     private int legendVotes = 0;
 
     private int type;
+    private LocalDate currentDate;
 
-    public Election(int type){
+    public Election(int type, LocalDate date){
         this.type = type;
+        this.currentDate = date;
     }
     
     //==============Getters======================//
@@ -37,6 +39,9 @@ public class Election {
     }
     public Map<Integer, PoliticalParty> getPartiesMap(){
         return parties;
+    }
+    public LocalDate getCurrentDate() {
+        return currentDate;
     }
 
     //==============Setters======================//
@@ -138,5 +143,34 @@ public class Election {
             pList.get(i).setPosition(i+1);
         } 
         return pList;
+    }
+
+    public int electedAmountByAge(int start, int end){
+        int total=0;
+        long diff=0;
+        for(Candidate c: electedCandidates()){
+            diff = c.getDtNascimento().until(this.currentDate, ChronoUnit.YEARS);
+            if(diff >= start && diff <= end)
+                total++;
+        }
+        return total;
+    }
+
+    public int electedMen(){
+        int total=0;
+        for(Candidate c: electedCandidates()){
+            if(c.getCdGenero() == 2)
+                total++;
+        }
+        return total;
+    }
+
+    public int electedWomen(){
+        int total=0;
+        for(Candidate c: electedCandidates()){
+            if(c.getCdGenero() == 4)
+                total++;
+        }
+        return total;
     }
 }   

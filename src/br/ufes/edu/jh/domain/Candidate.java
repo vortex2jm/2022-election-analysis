@@ -1,18 +1,18 @@
 package br.ufes.edu.jh.domain;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Candidate implements Comparable<Candidate>{
     
     private int nrCandidato;
     private String nmUrnaCandidato;
-    private Date dtNascimento;
+    private LocalDate dtNascimento;
     private boolean cdSitTotTurno;
     private int cdGenero;
     private PoliticalParty party;
     private int qtVotos;
     private int position;
 
-    public Candidate(int nrCandidato, String nmUrnaCandidato, Date dtNascimento,
+    public Candidate(int nrCandidato, String nmUrnaCandidato, LocalDate dtNascimento,
      boolean cdSitTotTurno, int cdGenero, PoliticalParty party){
 
         this.nrCandidato = nrCandidato;
@@ -43,7 +43,7 @@ public class Candidate implements Comparable<Candidate>{
     public int getQtVotos() {
         return qtVotos;
     }
-    public Date getDtNascimento() {
+    public LocalDate getDtNascimento() {
         return dtNascimento;
     }
     public int getCdGenero() {
