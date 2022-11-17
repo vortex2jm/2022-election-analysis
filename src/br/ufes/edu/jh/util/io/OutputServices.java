@@ -1,5 +1,8 @@
 package br.ufes.edu.jh.util.io;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import br.ufes.edu.jh.domain.Candidate;
 import br.ufes.edu.jh.domain.Election;
 import br.ufes.edu.jh.domain.PoliticalParty;
@@ -7,6 +10,10 @@ import br.ufes.edu.jh.domain.PoliticalParty;
 public class OutputServices {
     
     public static void generateReports(Election election){
+
+        //Instância do Number Format para modificar as saídas (Será necessário modificar o printf para println)
+        Locale localeBr = Locale.forLanguageTag("pt_BR");
+        NumberFormat nf = NumberFormat.getInstance(localeBr);
 
         System.out.println("Número de vagas: "+election.electedAmount());
         System.out.print("\n");
