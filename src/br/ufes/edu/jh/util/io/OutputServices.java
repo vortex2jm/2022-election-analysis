@@ -16,7 +16,7 @@ public class OutputServices {
         NumberFormat nf = NumberFormat.getInstance(localeBr);
 
         System.out.println("Número de vagas: "+election.electedAmount());
-        System.out.print("\n");
+        System.out.println();
         
         //===============================================================//
         String category="";
@@ -24,6 +24,7 @@ public class OutputServices {
             category = "federais";
         else if(election.getType() == 7)
             category = "estaduais";
+            
         System.out.printf("Deputados %s eleitos:\n", category);
         for(Candidate c: election.electedCandidates()){
             System.out.printf("%d - ",c.getPosition());
