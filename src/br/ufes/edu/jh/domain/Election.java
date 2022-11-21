@@ -13,12 +13,13 @@ public class Election {
     private Map<Integer, Candidate> candidates = new HashMap<>();
     private Map<Integer, PoliticalParty> parties = new HashMap<>();
 
+    
     private int nominalVotes = 0;
     private int legendVotes = 0;
 
     private int type;
     private LocalDate currentDate;
-
+    
     public Election(int type, LocalDate date){
         this.type = type;
         this.currentDate = date;
@@ -43,7 +44,7 @@ public class Election {
     public LocalDate getCurrentDate() {
         return currentDate;
     }
-
+    
     //==============Setters======================//
     public void setNominalVotes(int nominalVotes) {
         this.nominalVotes += nominalVotes;
@@ -57,8 +58,12 @@ public class Election {
     public void addPartie(int key, PoliticalParty value) {
         this.parties.put(key, value);
     }
-
+    public void setParties(Map<Integer, PoliticalParty> parties) {
+        this.parties = parties;
+    }
+    
     //========================================================================//
+    
     public int electedAmount(){
         int result = 0;
         var c = new ArrayList<Candidate>(candidates.values());
@@ -79,7 +84,7 @@ public class Election {
         }
         result.sort(null);
         for(int i=0; i<result.size(); i++){
-            result.get(i).setPosition(i+1);
+            result.get(i).setPosition(i+1); //why?
         }
         return result;
     }
@@ -95,27 +100,37 @@ public class Election {
 
     public List<Candidate> getBestCandidates(){
         var c = new ArrayList<Candidate>();
-        for(int i=0; i<electedAmount(); i++){
-            c.add(getAllCandidates().get(i));
+        int electedAmount = electedAmount();
+        List<Candidate> allCandidates = getAllCandidates();
+
+
+        for(int i=0; i<electedAmount; i++){
+            c.add(allCandidates.get(i));
         }
         c.sort(null);
         return c;
     }
 
+    //would be elected if majority rule
     public List<Candidate> electedIfMajorElection(){
         var mjEl = new ArrayList<Candidate>();
+        List<Candidate> electedCandidates = electedCandidates();
+
         for(Candidate c: getBestCandidates()){
-            if(!electedCandidates().contains(c))
+            if(!electedCandidates.contains(c))
                 mjEl.add(c);
         }
         mjEl.sort(null);
         return mjEl;
     }
 
+    //benefited on the proportional system
     public List<Candidate> electedByProportional(){
         var elctdProp = new ArrayList<Candidate>();
+        List<Candidate> mostVoted = getBestCandidates();
+
         for(Candidate c: electedCandidates()){
-            if(!getBestCandidates().contains(c))
+            if(!mostVoted.contains(c))
                 elctdProp.add(c);
         }
         elctdProp.sort(null);
@@ -133,11 +148,14 @@ public class Election {
 
     public List<PoliticalParty> getPartiesOrderedByCandidates(){
         var pList = new ArrayList<PoliticalParty>();
+
         for(PoliticalParty p: getParties()){
             if(p.getTotalVotes() > 0)
                 pList.add(p);
         }
-        pList.sort(new PartyComparatorByCandidate());
+        PartyComparatorByCandidate comparator = new PartyComparatorByCandidate();
+        
+        pList.sort(comparator);
         for(int i=0; i<pList.size(); i++){
             pList.get(i).setPosition(i+1);
         } 
