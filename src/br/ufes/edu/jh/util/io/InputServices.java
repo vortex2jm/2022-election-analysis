@@ -2,7 +2,10 @@ package br.ufes.edu.jh.util.io;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.nio.charset.Charset;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 import br.ufes.edu.jh.domain.Candidate;
 import br.ufes.edu.jh.domain.Election;
@@ -10,9 +13,23 @@ import br.ufes.edu.jh.domain.PoliticalParty;
 
 public class InputServices {
 
+    //checks for parties with no valid candidates and eliminates them from the election
+    public static Map<Integer, PoliticalParty> checksParties(Election election) {
+
+        List<PoliticalParty> parties = election.getParties();
+        Map<Integer,PoliticalParty> current = election.getPartiesMap();
+
+        for(PoliticalParty p: parties){
+            if(p.getCandidatesList().size() == 0){
+                current.remove(p.getNumber());
+            }
+        }
+        return current;
+    }
+
     public static BufferedReader createBuffer(String args) throws Exception {
         try {
-            BufferedReader buffer = new BufferedReader(new FileReader(new File(args)));
+            BufferedReader buffer = new BufferedReader(new FileReader(new File(args),Charset.forName("ISO-8859-1")));
             return buffer;
         } catch (Exception e) {
             throw e;
@@ -113,7 +130,7 @@ public class InputServices {
         String currentLine;
         String[] currentData;
 
-        bufferVotes.readLine();
+        bufferVotes.readLine();//eliminates caption line
         while ((currentLine = bufferVotes.readLine()) != null) {
 
             currentData = dataFormatter(currentLine);
@@ -128,6 +145,7 @@ public class InputServices {
     public static void processCandidatesVotes(Election election, String[] data){
         int nrVotavel = Integer.parseInt(data[19]);
         int qtVotos = Integer.parseInt(data[21]);
+
 
         if(election.getCandidatesMap().containsKey(nrVotavel)){
             election.getCandidatesMap().get(nrVotavel).setQtVotos(qtVotos);
