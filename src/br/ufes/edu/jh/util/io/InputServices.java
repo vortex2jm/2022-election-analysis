@@ -14,7 +14,7 @@ import br.ufes.edu.jh.domain.PoliticalParty;
 public class InputServices {
 
     //checks for parties with no valid candidates and eliminates them from the election
-    public static Map<Integer, PoliticalParty> checksParties(Election election) {
+    public static void checksParties(Election election) {
 
         List<PoliticalParty> parties = election.getParties();
         Map<Integer,PoliticalParty> current = election.getPartiesMap();
@@ -24,7 +24,7 @@ public class InputServices {
                 current.remove(p.getNumber());
             }
         }
-        return current;
+        election.setParties(current);
     }
 
     public static BufferedReader createBuffer(String args) throws Exception {
@@ -36,7 +36,7 @@ public class InputServices {
         }
     }
 
-    public static boolean candidateIsValid(String cdCargo, String cdDetalhesSituacaoCand, int type) {
+    private static boolean candidateIsValid(String cdCargo, String cdDetalhesSituacaoCand, int type) {
         int cdC = Integer.parseInt(cdCargo);
         int cdD = Integer.parseInt(cdDetalhesSituacaoCand);
         if (cdC == type && (cdD == 2 || cdD == 16))
@@ -45,7 +45,7 @@ public class InputServices {
     }
 
     //Overload
-    public static boolean candidateIsValid(String cdCargo, int type, String nrVotavel){
+    private static boolean candidateIsValid(String cdCargo, int type, String nrVotavel){
         int cdC = Integer.parseInt(cdCargo);
         int nrV = Integer.parseInt(nrVotavel);
         if(cdC == type && nrV != 95 && nrV != 96 && nrV != 97 && nrV != 98)
@@ -53,7 +53,7 @@ public class InputServices {
         return false;
     }
 
-    public static PoliticalParty updateParties(Election election, String[] data) {
+    private static PoliticalParty updateParties(Election election, String[] data) {
 
         int nrPartido = Integer.parseInt(data[27]);
         String sgPartido = data[28];
@@ -68,7 +68,7 @@ public class InputServices {
         return p;
     }
 
-    public static String[] dataFormatter(String line) {
+    private static String[] dataFormatter(String line) {
         String[] currentData = line.split(";");
         for (int i = 0; i < currentData.length; i++) {
             currentData[i] = currentData[i].replaceAll("\"", "");
@@ -76,7 +76,7 @@ public class InputServices {
         return currentData;
     }
 
-    public static void updateCandidates(Election election, String[] data, PoliticalParty party) throws Exception {
+    private static void updateCandidates(Election election, String[] data, PoliticalParty party) throws Exception {
 
         //SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         //Date dtNsc = dateFormat.parse(data[42]);
@@ -97,7 +97,7 @@ public class InputServices {
         party.setCandidatesList(cand);
     }
 
-    public static boolean isElectedCandidate(String sit) {
+    private static boolean isElectedCandidate(String sit) {
         int situation = Integer.parseInt(sit);
         if (situation == 2 || situation == 3)
             return true;
@@ -142,7 +142,7 @@ public class InputServices {
 
     }
 
-    public static void processCandidatesVotes(Election election, String[] data){
+    private static void processCandidatesVotes(Election election, String[] data){
         int nrVotavel = Integer.parseInt(data[19]);
         int qtVotos = Integer.parseInt(data[21]);
 

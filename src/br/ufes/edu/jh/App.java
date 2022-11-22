@@ -32,7 +32,7 @@ public class App {
 
         InputServices.processCandidatesFile(bufferCandidates, election);
         InputServices.processVotesFile(bufferVotes, election);
-        election.setParties(InputServices.checksParties(election));
+        InputServices.checksParties(election);
 
         OutputServices.generateReports(election);
     }
