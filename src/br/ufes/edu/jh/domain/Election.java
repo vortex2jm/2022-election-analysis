@@ -13,13 +13,13 @@ public class Election {
     private Map<Integer, Candidate> candidates = new HashMap<>();
     private Map<Integer, PoliticalParty> parties = new HashMap<>();
 
-    
     private int nominalVotes = 0;
     private int legendVotes = 0;
 
     private int type;
     private LocalDate currentDate;
     
+    //Constructor================================//
     public Election(int type, LocalDate date){
         this.type = type;
         this.currentDate = date;
@@ -52,18 +52,24 @@ public class Election {
     public void setLegendVotes(int legendVotes) {
         this.legendVotes += legendVotes;
     }
-    public void addCandidate(int key, Candidate value) {
-        this.candidates.put(key, value);
+    public void addCandidate(int nrCandidato, String nmUrnaCandidato, LocalDate dtNascimento,
+      boolean cdSitTotTurno, int cdGenero, PoliticalParty party){
+
+        Candidate cand = new Candidate(nrCandidato, nmUrnaCandidato, dtNascimento, cdSitTotTurno, cdGenero, party);
+        this.candidates.put(nrCandidato, cand);
+        party.setCandidatesList(cand);
     }
-    public void addPartie(int key, PoliticalParty value) {
-        this.parties.put(key, value);
+    public PoliticalParty addPartie(int number, String sg, int federation){
+
+        PoliticalParty p = new PoliticalParty(number, sg, federation);
+        this.parties.put(number, p);
+        return p;
     }
     public void setParties(Map<Integer, PoliticalParty> parties) {
         this.parties = parties;
     }
     
     //========================================================================//
-    
     public int electedAmount(){
         int result = 0;
         var c = new ArrayList<Candidate>(candidates.values());
