@@ -11,7 +11,6 @@ public class OutputServices {
     
     public static void generateReports(Election election){
 
-        //Instância do Number Format para modificar as saídas (Será necessário modificar o printf para println)
         Locale localeBr = Locale.forLanguageTag("pt-BR");
         NumberFormat nf = NumberFormat.getInstance(localeBr);
         NumberFormat nfDec = NumberFormat.getInstance(localeBr);
@@ -20,7 +19,7 @@ public class OutputServices {
 
         System.out.println("Número de vagas: " + nf.format(election.electedAmount()));
         System.out.println();
-        
+
         //===============================================================//
         String category="";
         if(election.getType() == 6)
@@ -33,7 +32,9 @@ public class OutputServices {
             System.out.printf("%s - ", nf.format(c.getPosition()));
             if(c.getParty().getFederation() != -1)
                 System.out.print("*");
-            System.out.println(c);
+
+            System.out.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(),
+                c.getParty().getSg(), c.getQtVotos());
         }
         System.out.print("\n");
         
@@ -41,7 +42,10 @@ public class OutputServices {
         System.out.println("Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):");
         for(Candidate c: election.getBestCandidates()){
             System.out.printf("%s - ", nf.format(c.getPosition()));
-            System.out.println(c);
+            if(c.getParty().getFederation() != -1)
+                System.out.print("*");
+            System.out.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(),
+                c.getParty().getSg(), c.getQtVotos());
         }
         System.out.print("\n");
 
@@ -50,7 +54,10 @@ public class OutputServices {
         System.out.println("(com sua posição no ranking de mais votados)");
         for(Candidate c: election.electedIfMajorElection()){
             System.out.printf("%s - ", nf.format(c.getPosition()));
-            System.out.println(c);
+            if(c.getParty().getFederation() != -1)
+                System.out.print("*");
+            System.out.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(),
+                c.getParty().getSg(), c.getQtVotos());
         }
         System.out.print("\n");
 
@@ -59,7 +66,10 @@ public class OutputServices {
         System.out.println("(com sua posição no ranking de mais votados)");
         for(Candidate c: election.electedByProportional()){
             System.out.printf("%s - ", nf.format(c.getPosition()));
-            System.out.println(c);
+            if(c.getParty().getFederation() != -1)
+                System.out.print("*");
+            System.out.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(),
+                c.getParty().getSg(), c.getQtVotos());
         }
         System.out.print("\n");
 
