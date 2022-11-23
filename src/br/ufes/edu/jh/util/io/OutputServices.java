@@ -12,10 +12,13 @@ public class OutputServices {
     public static void generateReports(Election election){
 
         //Instância do Number Format para modificar as saídas (Será necessário modificar o printf para println)
-        Locale localeBr = Locale.forLanguageTag("pt_BR");
+        Locale localeBr = Locale.forLanguageTag("pt-BR");
         NumberFormat nf = NumberFormat.getInstance(localeBr);
+        NumberFormat nfDec = NumberFormat.getInstance(localeBr);
+        nfDec.setMinimumFractionDigits(2);
+        nfDec.setMaximumFractionDigits(2);
 
-        System.out.println("Número de vagas: "+election.electedAmount());
+        System.out.println("Número de vagas: " + nf.format(election.electedAmount()));
         System.out.println();
         
         //===============================================================//
@@ -27,7 +30,7 @@ public class OutputServices {
             
         System.out.printf("Deputados %s eleitos:\n", category);
         for(Candidate c: election.electedCandidates()){
-            System.out.printf("%d - ",c.getPosition());
+            System.out.printf("%s - ", nf.format(c.getPosition()));
             if(c.getParty().getFederation() != -1)
                 System.out.print("*");
             System.out.println(c);
@@ -37,7 +40,7 @@ public class OutputServices {
         //===============================================================//
         System.out.println("Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):");
         for(Candidate c: election.getBestCandidates()){
-            System.out.printf("%d - ", c.getPosition());
+            System.out.printf("%s - ", nf.format(c.getPosition()));
             System.out.println(c);
         }
         System.out.print("\n");
@@ -46,7 +49,7 @@ public class OutputServices {
         System.out.println("Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:");
         System.out.println("(com sua posição no ranking de mais votados)");
         for(Candidate c: election.electedIfMajorElection()){
-            System.out.printf("%d - ", c.getPosition());
+            System.out.printf("%s - ", nf.format(c.getPosition()));
             System.out.println(c);
         }
         System.out.print("\n");
@@ -55,7 +58,7 @@ public class OutputServices {
         System.out.println("Eleitos, que se beneficiaram do sistema proporcional:");
         System.out.println("(com sua posição no ranking de mais votados)");
         for(Candidate c: election.electedByProportional()){
-            System.out.printf("%d - ", c.getPosition());
+            System.out.printf("%s - ", nf.format(c.getPosition()));
             System.out.println(c);
         }
         System.out.print("\n");
@@ -63,20 +66,20 @@ public class OutputServices {
         //===============================================================//
         System.out.println("Votação dos partidos e número de candidatos eleitos:");
         for(PoliticalParty p: election.getParties()){
-            System.out.printf("%d - %s - %d, %d votos (%d nominais e %d de legenda), %d candidatos eleitos\n",
-            p.getPosition(), p.getSg(), p.getNumber(), p.getTotalVotes(),
-            p.getNominalVotes(), p.getLegendVotes(), p.getElectedAmount());
+            System.out.printf("%s - %s - %s, %s votos (%s nominais e %s de legenda), %s candidatos eleitos\n",
+            nf.format(p.getPosition()), p.getSg(), nf.format(p.getNumber()), nf.format(p.getTotalVotes()),
+            nf.format(p.getNominalVotes()), nf.format(p.getLegendVotes()), nf.format(p.getElectedAmount()));
         }
         System.out.print("\n");
         
         //===============================================================//
         System.out.println("Primeiro e último colocados de cada partido:");
         for(PoliticalParty p: election.getPartiesOrderedByCandidates()){
-            System.out.printf("%d - %s - %d, %s (%d, %d votos) / %s (%d, %d votos)\n",
-            p.getPosition(), p.getSg(), p.getNumber(), p.mostVotedCandidate().getNmUrnaCandidato(), 
-            p.mostVotedCandidate().getNrCandidato(), p.mostVotedCandidate().getQtVotos(),
+            System.out.printf("%s - %s - %s, %s (%d, %s votos) / %s (%d, %s votos)\n",
+            nf.format(p.getPosition()), p.getSg(), nf.format(p.getNumber()), p.mostVotedCandidate().getNmUrnaCandidato(), 
+            p.mostVotedCandidate().getNrCandidato(), nf.format(p.mostVotedCandidate().getQtVotos()),
             p.leastVotedCandidate().getNmUrnaCandidato(), p.leastVotedCandidate().getNrCandidato(),
-            p.leastVotedCandidate().getQtVotos());
+            nf.format(p.leastVotedCandidate().getQtVotos()));
         }
         System.out.print("\n");
 
@@ -96,11 +99,11 @@ public class OutputServices {
         float p4 = ((float)f4 / (float)totalElected)*100;
         float p5 = ((float)f5 / (float)totalElected)*100;
 
-        System.out.printf("      Idade < 30: %d (%.2f%%)\n", f1, p1);
-        System.out.printf("30 <= Idade < 40: %d (%.2f%%)\n", f1, p2);
-        System.out.printf("40 <= Idade < 50: %d (%.2f%%)\n", f3, p3);
-        System.out.printf("50 <= Idade < 60: %d (%.2f%%)\n", f4, p4);
-        System.out.printf("60 <= Idade     : %d (%.2f%%)\n\n", f5, p5);
+        System.out.printf("      Idade < 30: %s (%s%%)\n", nf.format(f1), nfDec.format(p1));
+        System.out.printf("30 <= Idade < 40: %s (%s%%)\n", nf.format(f1), nfDec.format(p2));
+        System.out.printf("40 <= Idade < 50: %s (%s%%)\n", nf.format(f3), nfDec.format(p3));
+        System.out.printf("50 <= Idade < 60: %s (%s%%)\n", nf.format(f4), nfDec.format(p4));
+        System.out.printf("60 <= Idade     : %s (%s%%)\n\n", nf.format(f5), nfDec.format(p5));
 
         //===============================================================//
         System.out.println("Eleitos, por gênero:");
@@ -110,8 +113,8 @@ public class OutputServices {
         float pmen = ((float)men/(float)totalElected)*100;
         float pwomen = ((float)women/(float)totalElected)*100;
 
-        System.out.printf("Feminino: %d (%.2f%%)\n", women, pwomen);
-        System.out.printf("Masculino: %d (%.2f%%)\n", men, pmen);
+        System.out.printf("Feminino: %s (%s%%)\n", nf.format(women), nfDec.format(pwomen));
+        System.out.printf("Masculino: %s (%s%%)\n\n", nf.format(men), nfDec.format(pmen));
 
         //===============================================================//
         int validVotes = election.getLegendVotes() + election.getNominalVotes();
@@ -121,8 +124,8 @@ public class OutputServices {
         float pNominal = ((float)nominal/(float)validVotes) * 100;
         float pLegend = ((float)legend/(float)validVotes) * 100;
 
-        System.out.printf("Total de votos válidos:    %d\n", validVotes);
-        System.out.printf("Total de votos nominais:   %d (%.2f%%)\n", nominal, pNominal);
-        System.out.printf("Total de votos de legenda: %d (%.2f%%)\n", legend, pLegend);
+        System.out.printf("Total de votos válidos:    %s\n", nf.format(validVotes));
+        System.out.printf("Total de votos nominais:   %s (%s%%)\n", nf.format(nominal), nfDec.format(pNominal));
+        System.out.printf("Total de votos de legenda: %s (%s%%)\n", nf.format(legend), nfDec.format(pLegend));
     }
 }
