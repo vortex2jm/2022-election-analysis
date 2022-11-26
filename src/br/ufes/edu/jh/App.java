@@ -1,5 +1,7 @@
 package br.ufes.edu.jh;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 
 import br.ufes.edu.jh.domain.Election;
@@ -19,8 +21,9 @@ public class App {
             throw new Exception("Argumento inválido"); 
 
         //creates buffers for the target files
-        BufferedReader bufferCandidates = InputServices.createBuffer(args[1]);
-        BufferedReader bufferVotes = InputServices.createBuffer(args[2]);
+        BufferedReader bufferCandidates = InputServices.createReadingBuffer(args[1]);
+        BufferedReader bufferVotes = InputServices.createReadingBuffer(args[2]);
+        PrintWriter writeService = OutputServices.createWritingBuffer("../out/saida.txt");
 
         //deals with the date format
         String[] date = args[3].split("/");
@@ -34,6 +37,7 @@ public class App {
         InputServices.processVotesFile(bufferVotes, election);
         InputServices.checksParties(election);
 
-        OutputServices.generateReports(election);
+        OutputServices.generateReports(election, writeService);
+        writeService.close();
     }
 }

@@ -12,10 +12,11 @@ public class Election {
     
     private Map<Integer, Candidate> candidates = new HashMap<>();
     private Map<Integer, PoliticalParty> parties = new HashMap<>();
-
+    private Map<Integer, Candidate> invalidCandidates = new HashMap<>();
+    
     private int nominalVotes = 0;
     private int legendVotes = 0;
-
+    
     private int type;
     private LocalDate currentDate;
     
@@ -41,6 +42,9 @@ public class Election {
     public Map<Integer, PoliticalParty> getPartiesMap(){
         return parties;
     }
+    public Map<Integer, Candidate> getInvalidCandidatesMap() {
+        return invalidCandidates;
+    }
     public LocalDate getCurrentDate() {
         return currentDate;
     }
@@ -52,12 +56,21 @@ public class Election {
     public void setLegendVotes(int legendVotes) {
         this.legendVotes += legendVotes;
     }
-    public void addCandidate(int nrCandidato, String nmUrnaCandidato, LocalDate dtNascimento,
+
+    //==============================================PUBLIC===============================================//
+    public void addCandidate(int nrCandidato, String nmUrnaCandidato, String nmTipoDestinoVotos, LocalDate dtNascimento,
       boolean cdSitTotTurno, int cdGenero, PoliticalParty party){
 
-        Candidate cand = new Candidate(nrCandidato, nmUrnaCandidato, dtNascimento, cdSitTotTurno, cdGenero, party);
+        Candidate cand = new Candidate(nrCandidato, nmUrnaCandidato, nmTipoDestinoVotos, dtNascimento, cdSitTotTurno, cdGenero, party);
         this.candidates.put(nrCandidato, cand);
         party.setCandidatesList(cand);
+    }
+    public void addInvalidCandidate(int nrCandidato, String nmUrnaCandidato, String nmTipoDestinoVotos, LocalDate dtNascimento,
+      boolean cdSitTotTurno, int cdGenero, PoliticalParty party){
+
+        Candidate invalidCand = new Candidate(nrCandidato, nmUrnaCandidato, nmTipoDestinoVotos, dtNascimento, cdSitTotTurno, cdGenero, party);
+        this.invalidCandidates.put(nrCandidato, invalidCand);
+        //party.setCandidatesList(invalidCand);
     }
     public PoliticalParty addPartie(int number, String sg, int federation){
 
@@ -90,7 +103,7 @@ public class Election {
         }
         result.sort(null);
         for(int i=0; i<result.size(); i++){
-            result.get(i).setPosition(i+1); //why?
+            result.get(i).setPosition(i+1); 
         }
         return result;
     }
