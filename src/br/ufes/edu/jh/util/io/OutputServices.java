@@ -44,9 +44,9 @@ public class OutputServices {
                 printer.print("*");
                 System.out.print("*");
 
-            printer.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), c.getQtVotos());
+            printer.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), nf.format(c.getQtVotos()));
             System.out.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(),
-            c.getParty().getSg(), c.getQtVotos());
+            c.getParty().getSg(), nf.format(c.getQtVotos()));
         }
         printer.printf("\n");
         System.out.print("\n");
@@ -62,9 +62,9 @@ public class OutputServices {
                 printer.print("*");
                 System.out.print("*");
 
-            printer.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), c.getQtVotos());
+            printer.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), nf.format(c.getQtVotos()));
             System.out.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(),
-            c.getParty().getSg(), c.getQtVotos());
+            c.getParty().getSg(), nf.format(c.getQtVotos()));
         }
         printer.print("\n");
         System.out.print("\n");
@@ -83,9 +83,9 @@ public class OutputServices {
                 printer.printf("*");
                 System.out.print("*");
             
-            printer.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), c.getQtVotos());
+            printer.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), nf.format(c.getQtVotos()));
             System.out.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(),
-                c.getParty().getSg(), c.getQtVotos());
+                c.getParty().getSg(), nf.format(c.getQtVotos()));
         }
         printer.print("\n");
         System.out.print("\n");
@@ -101,9 +101,9 @@ public class OutputServices {
             if(c.getParty().getFederation() != -1)
                 printer.print("*");
                 System.out.print("*");
-            printer.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), c.getQtVotos());
+            printer.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), nf.format(c.getQtVotos()));
             System.out.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(),
-                c.getParty().getSg(), c.getQtVotos());
+                c.getParty().getSg(), nf.format(c.getQtVotos()));
         }
         printer.print("\n");
         System.out.print("\n");
