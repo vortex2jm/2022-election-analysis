@@ -21,13 +21,28 @@ public class OutputServices {
         nfDec.setMinimumFractionDigits(2);
         nfDec.setMaximumFractionDigits(2);
 
+        numeroVagas(election, printer, nf);
+        electedCandidates(election, printer, nf);
+        mostVotedCandidates(election, printer, nf);
+        harmedCandidates(election, printer, nf);
+        benefitedCandidates(election, printer, nf);
+        partyVotingAndElectedCandidates(election, printer, nf);
+        firstAndLastCandidatesFromParties(election, printer, nf);
+        electedByAge(election, printer, nf, nfDec);
+        electedByGender(election, printer, nf, nfDec);
+        allVoting(election, printer, nf, nfDec);
+
+    }
+
+
+    private static void numeroVagas(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         printer.println("Número de vagas: " + nf.format(election.electedAmount()));
         printer.println();
 
         System.out.println("Número de vagas: " + nf.format(election.electedAmount()));
         System.out.println();
-
-        //===============================================================//
+    }
+    private static void electedCandidates(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         String category="";
         if(election.getType() == 6)
             category = "federais";
@@ -50,9 +65,8 @@ public class OutputServices {
         }
         printer.printf("\n");
         System.out.print("\n");
-
-        
-        //===============================================================//
+    }
+    private static void mostVotedCandidates(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         printer.println("Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):");
         System.out.println("Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):");
         for(Candidate c: election.getBestCandidates()){
@@ -68,9 +82,8 @@ public class OutputServices {
         }
         printer.print("\n");
         System.out.print("\n");
-        
-
-        //===============================================================//
+    }
+    private static void harmedCandidates(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         printer.println("Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:");
         printer.println("(com sua posição no ranking de mais votados)");
         System.out.println("Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:");
@@ -89,8 +102,8 @@ public class OutputServices {
         }
         printer.print("\n");
         System.out.print("\n");
-
-        //===============================================================//
+    }
+    private static void benefitedCandidates(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         printer.println("Eleitos, que se beneficiaram do sistema proporcional:");
         printer.println("(com sua posição no ranking de mais votados)");
         System.out.println("Eleitos, que se beneficiaram do sistema proporcional:");
@@ -107,8 +120,8 @@ public class OutputServices {
         }
         printer.print("\n");
         System.out.print("\n");
-
-        //===============================================================//
+    }
+    private static void partyVotingAndElectedCandidates(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         printer.println("Votação dos partidos e número de candidatos eleitos:");
         System.out.println("Votação dos partidos e número de candidatos eleitos:");
         for(PoliticalParty p: election.getParties()){
@@ -122,8 +135,8 @@ public class OutputServices {
         }
         printer.print("\n");
         System.out.print("\n");
-        
-        //===============================================================//
+    }
+    private static void firstAndLastCandidatesFromParties(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         printer.println("Primeiro e último colocados de cada partido:");
         System.out.println("Primeiro e último colocados de cada partido:");
         for(PoliticalParty p: election.getPartiesOrderedByCandidates()){
@@ -141,8 +154,8 @@ public class OutputServices {
         }
         printer.print("\n");
         System.out.print("\n");
-
-        //===============================================================//
+    }
+    private static void electedByAge(Election election, PrintWriter printer, NumberFormat nf, NumberFormat nfDec) throws IOException {
         printer.println("Eleitos, por faixa etária (na data da eleição):");
         System.out.println("Eleitos, por faixa etária (na data da eleição):");
         int totalElected = election.electedAmount();
@@ -170,9 +183,9 @@ public class OutputServices {
         System.out.printf("40 <= Idade < 50: %s (%s%%)\n", nf.format(f3), nfDec.format(p3));
         System.out.printf("50 <= Idade < 60: %s (%s%%)\n", nf.format(f4), nfDec.format(p4));
         System.out.printf("60 <= Idade     : %s (%s%%)\n\n", nf.format(f5), nfDec.format(p5));
-
-        //DONE UNTIL THIS POINT
-        //===============================================================//
+    }
+    private static void electedByGender(Election election, PrintWriter printer, NumberFormat nf, NumberFormat nfDec) throws IOException {
+        int totalElected = election.electedAmount();
         printer.println("Eleitos, por gênero:");
         System.out.println("Eleitos, por gênero:");
         int men = election.electedMen();
@@ -186,8 +199,8 @@ public class OutputServices {
         printer.printf("Masculino: %s (%s%%)\n\n", nf.format(men), nfDec.format(pmen));
         System.out.printf("Feminino: %s (%s%%)\n", nf.format(women), nfDec.format(pwomen));
         System.out.printf("Masculino: %s (%s%%)\n\n", nf.format(men), nfDec.format(pmen));
-
-        //===============================================================//
+    }
+    private static void allVoting(Election election, PrintWriter printer, NumberFormat nf, NumberFormat nfDec) throws IOException {
         int validVotes = election.getLegendVotes() + election.getNominalVotes();
         int nominal = election.getNominalVotes();
         int legend = election.getLegendVotes();
@@ -203,6 +216,7 @@ public class OutputServices {
         System.out.printf("Total de votos nominais:   %s (%s%%)\n", nf.format(nominal), nfDec.format(pNominal));
         System.out.printf("Total de votos de legenda: %s (%s%%)\n", nf.format(legend), nfDec.format(pLegend));
     }
+
 
 
     public static PrintWriter createWritingBuffer(String filePath) throws IOException {
