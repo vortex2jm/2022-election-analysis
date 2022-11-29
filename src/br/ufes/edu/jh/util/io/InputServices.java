@@ -1,11 +1,10 @@
 package br.ufes.edu.jh.util.io;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.nio.charset.Charset;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 
 import br.ufes.edu.jh.domain.Election;
 import br.ufes.edu.jh.domain.PoliticalParty;
