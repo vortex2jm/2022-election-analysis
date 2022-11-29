@@ -70,7 +70,6 @@ public class InputServices {
                 processInvalidCandidatesVotes(election, currentData);
             }
         }
-
     }
 
     //==================================================================================================//
@@ -108,7 +107,6 @@ public class InputServices {
 
     //==================================================================================================//
     private static PoliticalParty updateParties(Election election, String[] data) {
-
         int nrPartido = Integer.parseInt(data[27]);
         String sgPartido = data[28];
         int nrFederacao = Integer.parseInt(data[30]);
@@ -116,7 +114,6 @@ public class InputServices {
         if (election.getPartiesMap().containsKey(nrPartido)) {
             return election.getPartiesMap().get(nrPartido);
         }
-
         return election.addPartie(nrPartido, sgPartido, nrFederacao);
     }
 
