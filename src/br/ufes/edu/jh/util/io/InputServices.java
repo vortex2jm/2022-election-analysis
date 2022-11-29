@@ -72,20 +72,6 @@ public class InputServices {
         }
     }
 
-    //==================================================================================================//
-    public static void checksParties(Election election) {
-
-        List<PoliticalParty> parties = election.getParties();
-        Map<Integer,PoliticalParty> current = election.getPartiesMap();
-
-        for(PoliticalParty p: parties){
-            if(p.getCandidatesList().size() == 0){
-                current.remove(p.getNumber());
-            }
-        }
-        election.setParties(current);
-    }
-
                                     //========PRIVATE=======//
     //==================================================================================================//
     private static boolean candidateIsValid(String cdCargo, String cdDetalhesSituacaoCand, int type) {

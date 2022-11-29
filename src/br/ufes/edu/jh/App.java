@@ -34,7 +34,6 @@ public class App {
 
         InputServices.processCandidatesFile(bufferCandidates, election);
         InputServices.processVotesFile(bufferVotes, election);
-        InputServices.checksParties(election);
 
         OutputServices.generateReports(election, writeService);
         writeService.close();

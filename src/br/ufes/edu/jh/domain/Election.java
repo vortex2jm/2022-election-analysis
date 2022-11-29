@@ -175,7 +175,7 @@ public class Election {
         var pList = new ArrayList<PoliticalParty>();
 
         for(PoliticalParty p: getParties()){
-            if(p.getTotalVotes() > 0)
+            if(p.getTotalVotes() > 0 && p.getCandidatesList().size() != 0)
                 pList.add(p);
         }
         PartyComparatorByCandidate comparator = new PartyComparatorByCandidate();

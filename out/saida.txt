@@ -1,150 +1,113 @@
-Número de vagas: 30
+Número de vagas: 10
 
-Deputados estaduais eleitos:
-1 - SERGIO MENEGUELLI (REPUBLICANOS, 138.523 votos)
-2 - CAPITÃO ASSUMÇÃO (PL, 98.669 votos)
-3 - *JOÃO COSER (PT, 58.279 votos)
-4 - *CAMILA VALADAO (PSOL, 52.221 votos)
-5 - MARCELO SANTOS (PODE, 41.627 votos)
-6 - *IRINY LOPES (PT, 36.720 votos)
-7 - TYAGO HOFFMANN (PSB, 32.123 votos)
-8 - DR BRUNO RESENDE (UNIÃO, 31.897 votos)
-9 - LUCAS POLESE (PL, 29.490 votos)
-10 - *VANDINHO LEITE (PSDB, 29.156 votos)
-11 - LUCAS SCARAMUSSA (PODE, 26.720 votos)
-12 - RAQUEL LESSA (PP, 26.439 votos)
-13 - DENNINHO SILVA (UNIÃO, 25.986 votos)
-14 - JANETE DE SÁ (PSB, 25.846 votos)
-15 - DELEGADO DANILO BAHIENSE (PL, 24.970 votos)
-16 - PABLO MURIBECA (PATRIOTA, 24.555 votos)
-17 - ADILSON ESPINDULA (PDT, 22.278 votos)
-18 - FERRAÇO (PP, 20.888 votos)
-19 - HUDSON LEAL (REPUBLICANOS, 20.804 votos)
-20 - *MAZINHO DOS ANJOS (PSDB, 20.731 votos)
-21 - ALEXANDRE XAMBINHO (PSC, 20.722 votos)
-22 - JOSE ESMERALDO (PDT, 20.219 votos)
-23 - DARY PAGUNG (PSB, 18.721 votos)
-24 - *FABRÍCIO GANDINI (CIDADANIA, 16.948 votos)
-25 - CALLEGARI (PL, 16.842 votos)
-26 - ZÉ PRETO (PL, 15.901 votos)
-27 - ALCÂNTARO (REPUBLICANOS, 15.742 votos)
-28 - ALLAN FERREIRA (PODE, 15.185 votos)
-29 - BISPO ALVES (REPUBLICANOS, 14.474 votos)
-30 - CORONEL WELITON (PTB, 12.176 votos)
+Deputados federais eleitos:
+1 - *HELDER SALOMÃO (PT, 120.337 votos)
+2 - GILVAN O FEDERAL DA DIREITA (PL, 87.994 votos)
+3 - EVAIR DE MELO (PP, 75.034 votos)
+4 - GILSON DANIEL (PODE, 74.215 votos)
+5 - DA VITÓRIA (PP, 71.779 votos)
+6 - DR. VICTOR (PODE, 53.483 votos)
+7 - AMARO NETO (REPUBLICANOS, 52.375 votos)
+8 - *JACK ROCHA (PT, 51.317 votos)
+9 - PAULO FOLETTO (PSB, 48.776 votos)
+10 - MESSIAS DONATO (REPUBLICANOS, 42.640 votos)
 
 Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):
-1 - SERGIO MENEGUELLI (REPUBLICANOS, 138.523 votos)
-2 - CAPITÃO ASSUMÇÃO (PL, 98.669 votos)
-3 - *JOÃO COSER (PT, 58.279 votos)
-4 - *CAMILA VALADAO (PSOL, 52.221 votos)
-5 - MARCELO SANTOS (PODE, 41.627 votos)
-6 - *IRINY LOPES (PT, 36.720 votos)
-7 - TYAGO HOFFMANN (PSB, 32.123 votos)
-8 - DR BRUNO RESENDE (UNIÃO, 31.897 votos)
-9 - LUCAS POLESE (PL, 29.490 votos)
-10 - *VANDINHO LEITE (PSDB, 29.156 votos)
-11 - LUCAS SCARAMUSSA (PODE, 26.720 votos)
-12 - RAQUEL LESSA (PP, 26.439 votos)
-13 - DENNINHO SILVA (UNIÃO, 25.986 votos)
-14 - JANETE DE SÁ (PSB, 25.846 votos)
-15 - DELEGADO DANILO BAHIENSE (PL, 24.970 votos)
-16 - PABLO MURIBECA (PATRIOTA, 24.555 votos)
-17 - DOUTOR HERCULES (PATRIOTA, 23.534 votos)
-18 - ADILSON ESPINDULA (PDT, 22.278 votos)
-19 - FERRAÇO (PP, 20.888 votos)
-20 - HUDSON LEAL (REPUBLICANOS, 20.804 votos)
-21 - *MAZINHO DOS ANJOS (PSDB, 20.731 votos)
-22 - ALEXANDRE XAMBINHO (PSC, 20.722 votos)
-23 - JOSE ESMERALDO (PDT, 20.219 votos)
-24 - DARY PAGUNG (PSB, 18.721 votos)
-25 - ALEXANDRE QUINTINO (PDT, 17.873 votos)
-26 - LUIZ DURÃO (PDT, 17.486 votos)
-27 - DAVI ESMAEL (PSD, 17.155 votos)
-28 - *FABRÍCIO GANDINI (CIDADANIA, 16.948 votos)
-29 - CALLEGARI (PL, 16.842 votos)
-30 - BRUNO LAMAS (PSB, 16.473 votos)
+1 - *HELDER SALOMÃO (PT, 120.337 votos)
+2 - GILVAN O FEDERAL DA DIREITA (PL, 87.994 votos)
+3 - RENZO VASCONCELOS (PSC, 82.276 votos)
+4 - EVAIR DE MELO (PP, 75.034 votos)
+5 - GILSON DANIEL (PODE, 74.215 votos)
+6 - DA VITÓRIA (PP, 71.779 votos)
+7 - FELIPE RIGONI (UNIÃO, 63.362 votos)
+8 - SORAYA MANATO (PTB, 59.988 votos)
+9 - TENENTE ASSIS (PTB, 58.887 votos)
+10 - SUELI VIDIGAL (PDT, 58.251 votos)
 
 Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:
 (com sua posição no ranking de mais votados)
-17 - DOUTOR HERCULES (PATRIOTA, 23.534 votos)
-25 - ALEXANDRE QUINTINO (PDT, 17.873 votos)
-26 - LUIZ DURÃO (PDT, 17.486 votos)
-27 - DAVI ESMAEL (PSD, 17.155 votos)
-30 - BRUNO LAMAS (PSB, 16.473 votos)
+3 - RENZO VASCONCELOS (PSC, 82.276 votos)
+7 - FELIPE RIGONI (UNIÃO, 63.362 votos)
+8 - SORAYA MANATO (PTB, 59.988 votos)
+9 - TENENTE ASSIS (PTB, 58.887 votos)
+10 - SUELI VIDIGAL (PDT, 58.251 votos)
 
 Eleitos, que se beneficiaram do sistema proporcional:
 (com sua posição no ranking de mais votados)
-32 - ZÉ PRETO (PL, 15.901 votos)
-34 - ALCÂNTARO (REPUBLICANOS, 15.742 votos)
-37 - ALLAN FERREIRA (PODE, 15.185 votos)
-39 - BISPO ALVES (REPUBLICANOS, 14.474 votos)
-46 - CORONEL WELITON (PTB, 12.176 votos)
+11 - DR. VICTOR (PODE, 53.483 votos)
+12 - AMARO NETO (REPUBLICANOS, 52.375 votos)
+13 - *JACK ROCHA (PT, 51.317 votos)
+14 - PAULO FOLETTO (PSB, 48.776 votos)
+16 - MESSIAS DONATO (REPUBLICANOS, 42.640 votos)
 
 Votação dos partidos e número de candidatos eleitos:
-1 - PL - 22, 265.398 votos (246.183 nominais e 19.215 de legenda), 5 candidatos eleitos
-2 - REPUBLICANOS - 10, 258.409 votos (247.340 nominais e 11.069 de legenda), 4 candidatos eleitos
-3 - PSB - 40, 164.155 votos (154.600 nominais e 9.555 de legenda), 3 candidatos eleitos
-4 - PT - 13, 146.606 votos (133.536 nominais e 13.070 de legenda), 2 candidatos eleitos
-5 - UNIÃO - 44, 144.715 votos (141.413 nominais e 3.302 de legenda), 2 candidatos eleitos
-6 - PODE - 19, 140.112 votos (136.349 nominais e 3.763 de legenda), 3 candidatos eleitos
-7 - PP - 11, 137.514 votos (131.963 nominais e 5.551 de legenda), 2 candidatos eleitos
-8 - PSDB - 45, 113.730 votos (109.792 nominais e 3.938 de legenda), 2 candidatos eleitos
-9 - PDT - 12, 109.905 votos (104.359 nominais e 5.546 de legenda), 2 candidatos eleitos
-10 - PTB - 14, 96.412 votos (93.114 nominais e 3.298 de legenda), 1 candidato eleito
-11 - PATRIOTA - 51, 81.389 votos (79.753 nominais e 1.636 de legenda), 1 candidato eleito
-12 - PSC - 20, 73.749 votos (71.098 nominais e 2.651 de legenda), 1 candidato eleito
-13 - PSOL - 50, 56.100 votos (54.979 nominais e 1.121 de legenda), 1 candidato eleito
-14 - REDE - 18, 49.327 votos (47.784 nominais e 1.543 de legenda), 0 candidato eleito
-15 - PSD - 55, 48.628 votos (47.223 nominais e 1.405 de legenda), 0 candidato eleito
-16 - SOLIDARIEDADE - 77, 44.589 votos (44.027 nominais e 562 de legenda), 0 candidato eleito
-17 - CIDADANIA - 23, 32.895 votos (32.071 nominais e 824 de legenda), 1 candidato eleito
-18 - MDB - 15, 30.907 votos (10.104 nominais e 20.803 de legenda), 0 candidato eleito
-19 - DC - 27, 25.642 votos (25.241 nominais e 401 de legenda), 0 candidato eleito
-20 - PV - 43, 13.711 votos (13.362 nominais e 349 de legenda), 0 candidato eleito
-21 - AGIR - 36, 13.358 votos (13.161 nominais e 197 de legenda), 0 candidato eleito
-22 - PC do B - 65, 11.657 votos (11.216 nominais e 441 de legenda), 0 candidato eleito
-23 - PMB - 35, 9.562 votos (9.358 nominais e 204 de legenda), 0 candidato eleito
-24 - PROS - 90, 7.278 votos (7.129 nominais e 149 de legenda), 0 candidato eleito
-25 - PRTB - 28, 1.526 votos (1.350 nominais e 176 de legenda), 0 candidato eleito
+1 - PP - 11, 296.301 votos (291.375 nominais e 4.926 de legenda), 2 candidatos eleitos
+2 - PL - 22, 220.995 votos (207.005 nominais e 13.990 de legenda), 1 candidato eleito
+3 - PT - 13, 208.654 votos (193.704 nominais e 14.950 de legenda), 2 candidatos eleitos
+4 - REPUBLICANOS - 10, 200.917 votos (194.016 nominais e 6.901 de legenda), 2 candidatos eleitos
+5 - PSB - 40, 194.539 votos (187.962 nominais e 6.577 de legenda), 1 candidato eleito
+6 - PODE - 19, 193.999 votos (191.380 nominais e 2.619 de legenda), 2 candidatos eleitos
+7 - PTB - 14, 153.591 votos (150.750 nominais e 2.841 de legenda), 0 candidato eleito
+8 - PDT - 12, 125.713 votos (120.573 nominais e 5.140 de legenda), 0 candidato eleito
+9 - UNIÃO - 44, 123.947 votos (121.374 nominais e 2.573 de legenda), 0 candidato eleito
+10 - PSC - 20, 123.750 votos (121.721 nominais e 2.029 de legenda), 0 candidato eleito
+11 - PSDB - 45, 95.632 votos (93.379 nominais e 2.253 de legenda), 0 candidato eleito
+12 - PATRIOTA - 51, 75.289 votos (73.856 nominais e 1.433 de legenda), 0 candidato eleito
+13 - REDE - 18, 21.739 votos (20.405 nominais e 1.334 de legenda), 0 candidato eleito
+14 - PSOL - 50, 13.797 votos (12.501 nominais e 1.296 de legenda), 0 candidato eleito
+15 - NOVO - 30, 8.819 votos (8.221 nominais e 598 de legenda), 0 candidato eleito
+16 - PC do B - 65, 8.015 votos (7.531 nominais e 484 de legenda), 0 candidato eleito
+17 - SOLIDARIEDADE - 77, 3.633 votos (2.220 nominais e 1.413 de legenda), 0 candidato eleito
+18 - AVANTE - 70, 3.145 votos (2.976 nominais e 169 de legenda), 0 candidato eleito
+19 - PSD - 55, 2.644 votos (1.660 nominais e 984 de legenda), 0 candidato eleito
+20 - DC - 27, 2.070 votos (1.557 nominais e 513 de legenda), 0 candidato eleito
+21 - PRTB - 28, 2.023 votos (1.862 nominais e 161 de legenda), 0 candidato eleito
+22 - CIDADANIA - 23, 1.713 votos (715 nominais e 998 de legenda), 0 candidato eleito
+23 - PMB - 35, 1.391 votos (1.083 nominais e 308 de legenda), 0 candidato eleito
+24 - PV - 43, 1.118 votos (656 nominais e 462 de legenda), 0 candidato eleito
+25 - PROS - 90, 534 votos (0 nominal e 534 de legenda), 0 candidato eleito
+26 - AGIR - 36, 462 votos (176 nominais e 286 de legenda), 0 candidato eleito
+27 - MDB - 15, 0 voto (0 nominal e 0 de legenda), 0 candidato eleito
+28 - PSTU - 16, 0 voto (0 nominal e 0 de legenda), 0 candidato eleito
 
 Primeiro e último colocados de cada partido:
-1 - REPUBLICANOS - 10, SERGIO MENEGUELLI (10456, 138.523 votos) / HÉLIO GUILHERME (10789, 53 votos)
-2 - PL - 22, CAPITÃO ASSUMÇÃO (22190, 98.669 votos) / DANUBIA HERINGER (22456, 160 votos)
-3 - PT - 13, JOÃO COSER (13113, 58.279 votos) / JB FORROZÃO (13120, 690 votos)
-4 - PSOL - 50, CAMILA VALADAO (50180, 52.221 votos) / GEZUALDO GALVAO (50789, 119 votos)
-5 - PODE - 19, MARCELO SANTOS (19123, 41.627 votos) / RENATO RIGUETI (19298, 46 votos)
-6 - PSB - 40, TYAGO HOFFMANN (40456, 32.123 votos) / DRA. ANGELITA BOLZAN (40153, 209 votos)
-7 - UNIÃO - 44, DR BRUNO RESENDE (44000, 31.897 votos) / LILIAN NOVAES (44233, 50 votos)
-8 - PSDB - 45, VANDINHO LEITE (45678, 29.156 votos) / VAN BRASIL COLETIVO ES (45700, 8 votos)
-9 - PP - 11, RAQUEL LESSA (11333, 26.439 votos) / ZAQUEU SOARES (11455, 166 votos)
-10 - PATRIOTA - 51, PABLO MURIBECA (51555, 24.555 votos) / REGINA CÉLIA (51183, 18 votos)
-11 - PDT - 12, ADILSON ESPINDULA (12333, 22.278 votos) / JONH LENNO (12181, 117 votos)
-12 - PSC - 20, ALEXANDRE XAMBINHO (20789, 20.722 votos) / MIQUEIAS FISCAL DO POVO (20826, 6 votos)
-13 - PSD - 55, DAVI ESMAEL (55000, 17.155 votos) / DR FÁBIO LOUZADA (55321, 33 votos)
-14 - CIDADANIA - 23, FABRÍCIO GANDINI (23123, 16.948 votos) / DRA JANETE RODRIGUES (23777, 132 votos)
-15 - SOLIDARIEDADE - 77, GILSINHO LOPES (77300, 15.673 votos) / LURDINHA (77085, 25 votos)
-16 - REDE - 18, FABIO DUARTE (18123, 13.792 votos) / VAL (18200, 68 votos)
-17 - PTB - 14, CORONEL WELITON (14190, 12.176 votos) / ALVINHO CAMINHONEIRO (14144, 96 votos)
-18 - AGIR - 36, LEO PINDOBA (36333, 10.630 votos) / EVANGELISTA MARIO  (36770, 37 votos)
-19 - PC do B - 65, NETO BARROS (65123, 9.521 votos) / TONINHO PEREIRA (65022, 47 votos)
-20 - DC - 27, CARLOS VON (27333, 9.000 votos) / MARLUCIA ALMEIDA (27055, 9 votos)
-21 - PV - 43, ALEXANDRE BASTOS (43644, 6.942 votos) / SANDRA FRASSON (43122, 71 votos)
-22 - MDB - 15, LUKINHA LUBE (15688, 3.807 votos) / MARCOS DAMIANI (15700, 34 votos)
-23 - PMB - 35, ARTHUR WERNERSBACH (35035, 2.947 votos) / MATILDE MARINATO (35666, 5 votos)
-24 - PROS - 90, MAYCON JOGADOR (90456, 1.723 votos) / PROFESSORA VIVI (90000, 111 votos)
-25 - PRTB - 28, DANTAS EBENEZER (28022, 920 votos) / GLAUCIA TRANCOSO (28197, 34 votos)
+1 - PT - 13, HELDER SALOMÃO (1350, 120.337 votos) / NÊGA DO JONGO (1320, 2.536 votos)
+2 - PL - 22, GILVAN O FEDERAL DA DIREITA (2222, 87.994 votos) / SOL RIGHETH (2238, 1.122 votos)
+3 - PSC - 20, RENZO VASCONCELOS (2023, 82.276 votos) / DIANE KARATEKA (2030, 230 votos)
+4 - PP - 11, EVAIR DE MELO (1122, 75.034 votos) / ANINA (1147, 306 votos)
+5 - PODE - 19, GILSON DANIEL (1919, 74.215 votos) / ANDREA SOUZA (1910, 342 votos)
+6 - UNIÃO - 44, FELIPE RIGONI (4404, 63.362 votos) / JOSUÉ BATISTA (4456, 540 votos)
+7 - PTB - 14, SORAYA MANATO (1422, 59.988 votos) / DUDU LIMA (1415, 1.442 votos)
+8 - PDT - 12, SUELI VIDIGAL (1212, 58.251 votos) / ROSA JULIA GANDINI  (1221, 258 votos)
+9 - REPUBLICANOS - 10, AMARO NETO (1010, 52.375 votos) / MÁRCIA VITOR (1070, 156 votos)
+10 - PSB - 40, PAULO FOLETTO (4040, 48.776 votos) / MAYLLA VENTURIN (4090, 1.200 votos)
+11 - PSDB - 45, SERGIO MAJESKI (4567, 40.124 votos) / REGINA DO PROJETO HARPA (4599, 406 votos)
+12 - PATRIOTA - 51, DR RAFAEL FAVATTO (5151, 27.980 votos) / EMERSON SCHIFFLER (5145, 1.022 votos)
+13 - PSOL - 50, ANA PAULA ROCHA (5013, 9.153 votos) / HUDSON VASSOLER (5050, 1.331 votos)
+14 - REDE - 18, RAPHAELA MORAES (1818, 8.788 votos) / JUAREZ VEIGA (1848, 768 votos)
+15 - NOVO - 30, PATRICIA BORTOLON (3030, 8.221 votos) / PATRICIA BORTOLON (3030, 8.221 votos)
+16 - PC do B - 65, GEIZA  (6513, 7.010 votos) / LUCIVAN HEASE (6500, 521 votos)
+17 - AVANTE - 70, SAULO BUSSOLAR (7088, 1.026 votos) / REGINALDO ROSA (7007, 56 votos)
+18 - SOLIDARIEDADE - 77, GILSETE LOPES (7733, 964 votos) / PASTOR VALDECI GOMES (7788, 190 votos)
+19 - PSD - 55, NESINHO SOARES (5555, 686 votos) / CLAUDIO OLIVEIRA (5577, 143 votos)
+20 - CIDADANIA - 23, HELENA VITÓRIA (2300, 564 votos) / FELICIO (2340, 151 votos)
+21 - PMB - 35, PASTOR ANTONIO CANDIDO (3555, 538 votos) / KENIA BORGES (3524, 18 votos)
+22 - PRTB - 28, ARTUR PEREIRA (2822, 496 votos) / CANTOR HUDSON SANTOS (2877, 42 votos)
+23 - PV - 43, TONI LEMOS (4321, 355 votos) / RITA SOUZA (4343, 301 votos)
+24 - DC - 27, JOSIAS BEREDA (2770, 349 votos) / EVANILZA SOUZA (2727, 85 votos)
+25 - AGIR - 36, PASCOAL COSTA (3636, 71 votos) / ANA BORGES (3600, 37 votos)
 
 Eleitos, por faixa etária (na data da eleição):
-      Idade < 30: 1 (3,33%)
-30 <= Idade < 40: 6 (20,00%)
-40 <= Idade < 50: 8 (26,67%)
-50 <= Idade < 60: 6 (20,00%)
-60 <= Idade     : 9 (30,00%)
+      Idade < 30: 0 (0,00%)
+30 <= Idade < 40: 2 (20,00%)
+40 <= Idade < 50: 4 (40,00%)
+50 <= Idade < 60: 3 (30,00%)
+60 <= Idade     : 1 (10,00%)
 
 Eleitos, por gênero:
-Feminino:  4 (13,33%)
-Masculino: 26 (86,67%)
+Feminino:  1 (10,00%)
+Masculino: 9 (90,00%)
 
-Total de votos válidos:    2.077.274
-Total de votos nominais:   1.966.505 (94,67%)
-Total de votos de legenda: 110.769 (5,33%)
+Total de votos válidos:    2.084.430
+Total de votos nominais:   2.008.658 (96,36%)
+Total de votos de legenda: 75.772 (3,64%)
