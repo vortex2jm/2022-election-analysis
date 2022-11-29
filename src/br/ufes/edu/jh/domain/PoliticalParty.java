@@ -31,45 +31,13 @@ public class PoliticalParty implements Comparable<PoliticalParty>{
   public int getNumber() {
     return number;
   }
-  public List<Candidate> getCandidatesList() {
-    var list = new ArrayList<>(this.candidatesList);
-    list.sort(null);
-    return list;
-  }
-  public int getNominalVotes(){
-    int total=0;
-    for(Candidate c: candidatesList){
-      total += c.getQtVotos();    
-    }
-    return total;
-  }
-  public int getElectedAmount(){
-    int total=0;
-    for(Candidate c: candidatesList){
-      if(c.getCdSitTotTurno())
-        total++;
-    }
-    return total;
-  }
   public int getPosition() {
     return position;
   }
   public int getTotalVotes(){
     return this.legendVotes + getNominalVotes();
   }
-  public Candidate mostVotedCandidate(){
-    var list = new ArrayList<Candidate>(this.candidatesList);
-    list.sort(null);
-    
-    return list.get(0);
-  }
-
-  public Candidate leastVotedCandidate(){
-    var list = new ArrayList<Candidate>(this.candidatesList);
-    list.sort(null);
-    return list.get(list.size() - 1);
-  }
-
+  
   //======================Setters==================================//
   public void setLegendVotes(int legendVotes) {
     this.legendVotes += legendVotes;
@@ -81,10 +49,49 @@ public class PoliticalParty implements Comparable<PoliticalParty>{
     this.position = position;
   }
 
+  //======================another get methods======================//
+  public List<Candidate> getCandidatesList() {
+    var list = new ArrayList<>(this.candidatesList);
+    list.sort(null);
+    return list;
+  }
+
+  //======================================//
+  public int getNominalVotes(){
+    int total=0;
+    for(Candidate c: candidatesList){
+      total += c.getQtVotos();    
+    }
+    return total;
+  }
+
+  //======================================//
+  public int getElectedAmount(){
+    int total=0;
+    for(Candidate c: candidatesList){
+      if(c.getCdSitTotTurno())
+        total++;
+    }
+    return total;
+  }
+
+  //======================================//
+  public Candidate mostVotedCandidate(){
+    var list = new ArrayList<Candidate>(this.candidatesList);
+    list.sort(null);
+    return list.get(0);
+  }
+
+  //======================================//
+  public Candidate leastVotedCandidate(){
+    var list = new ArrayList<Candidate>(this.candidatesList);
+    list.sort(null);
+    return list.get(list.size() - 1);
+  }
+
   //================Override======================================//
   @Override
   public int compareTo(PoliticalParty arg0) {
-    
     int ownTotal = legendVotes + getNominalVotes();
     int otherTotal = arg0.legendVotes + arg0.getNominalVotes();
 

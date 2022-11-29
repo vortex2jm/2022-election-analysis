@@ -1,6 +1,6 @@
 package br.ufes.edu.jh;
+
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 
@@ -10,7 +10,6 @@ import br.ufes.edu.jh.util.io.OutputServices;
 
 public class App {
     public static void main(String[] args) throws Exception {
-
         //checks the desired processing
         int type;
         if(args[0].compareTo("--estadual") == 0)

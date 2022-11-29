@@ -56,8 +56,11 @@ public class Election {
     public void setLegendVotes(int legendVotes) {
         this.legendVotes += legendVotes;
     }
+    public void setParties(Map<Integer, PoliticalParty> parties) {
+        this.parties = parties;
+    }
 
-    //==============================================PUBLIC===============================================//
+    //================factory methods=====================================================================================================//
     public void addCandidate(int nrCandidato, String nmUrnaCandidato, String nmTipoDestinoVotos, LocalDate dtNascimento,
       boolean cdSitTotTurno, int cdGenero, PoliticalParty party){
 
@@ -70,19 +73,15 @@ public class Election {
 
         Candidate invalidCand = new Candidate(nrCandidato, nmUrnaCandidato, nmTipoDestinoVotos, dtNascimento, cdSitTotTurno, cdGenero, party);
         this.invalidCandidates.put(nrCandidato, invalidCand);
-        //party.setCandidatesList(invalidCand);
     }
     public PoliticalParty addPartie(int number, String sg, int federation){
-
         PoliticalParty p = new PoliticalParty(number, sg, federation);
         this.parties.put(number, p);
         return p;
     }
-    public void setParties(Map<Integer, PoliticalParty> parties) {
-        this.parties = parties;
-    }
     
-    //========================================================================//
+    
+    //===========================another get methods===============================//
     public int electedAmount(){
         int result = 0;
         var c = new ArrayList<Candidate>(candidates.values());
@@ -93,6 +92,7 @@ public class Election {
         return result;
     }   
 
+    //=========================================================//
     public List<Candidate> electedCandidates(){
         var c = new ArrayList<Candidate>(candidates.values());
         var result = new ArrayList<Candidate>();
@@ -103,20 +103,22 @@ public class Election {
         }
         result.sort(null);
         for(int i=0; i<result.size(); i++){
-            result.get(i).setPosition(i+1); 
+            result.get(i).setElectedPosition(i+1); 
         }
         return result;
     }
 
+    //=========================================================//
     public List<Candidate> getAllCandidates(){
         var c = new ArrayList<Candidate>(candidates.values());
         c.sort(null);
         for(int i=0; i<c.size(); i++){
-            c.get(i).setPosition(i+1);
+            c.get(i).setGeralPosition(i+1);
         }
         return c;
     }
 
+    //=========================================================//
     public List<Candidate> getBestCandidates(){
         var c = new ArrayList<Candidate>();
         int electedAmount = electedAmount();
@@ -130,6 +132,7 @@ public class Election {
         return c;
     }
 
+    //=========================================================//
     //would be elected if majority rule
     public List<Candidate> electedIfMajorElection(){
         var mjEl = new ArrayList<Candidate>();
@@ -143,6 +146,7 @@ public class Election {
         return mjEl;
     }
 
+    //=========================================================//
     //benefited on the proportional system
     public List<Candidate> electedByProportional(){
         var elctdProp = new ArrayList<Candidate>();
@@ -156,6 +160,7 @@ public class Election {
         return elctdProp;
     }
 
+    //=========================================================//
     public List<PoliticalParty> getParties(){
         var p = new ArrayList<PoliticalParty>(parties.values());
         p.sort(null);
@@ -165,6 +170,7 @@ public class Election {
         return p;
     }
 
+    //=========================================================//
     public List<PoliticalParty> getPartiesOrderedByCandidates(){
         var pList = new ArrayList<PoliticalParty>();
 
@@ -181,6 +187,7 @@ public class Election {
         return pList;
     }
 
+    //=========================================================//
     public int electedAmountByAge(int start, int end){
         int total=0;
         long diff=0;
@@ -192,6 +199,7 @@ public class Election {
         return total;
     }
 
+    //=========================================================//
     public int electedMen(){
         int total=0;
         for(Candidate c: electedCandidates()){
@@ -201,6 +209,7 @@ public class Election {
         return total;
     }
 
+    //=========================================================//
     public int electedWomen(){
         int total=0;
         for(Candidate c: electedCandidates()){
