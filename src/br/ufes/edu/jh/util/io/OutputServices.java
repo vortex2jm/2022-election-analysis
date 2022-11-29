@@ -14,14 +14,15 @@ import br.ufes.edu.jh.domain.PoliticalParty;
 public class OutputServices {
     
     public static void generateReports(Election election, PrintWriter printer) throws IOException{
-
+        // Formatting numbers
         Locale localeBr = Locale.forLanguageTag("pt-BR");
         NumberFormat nf = NumberFormat.getInstance(localeBr);
         NumberFormat nfDec = NumberFormat.getInstance(localeBr);
         nfDec.setMinimumFractionDigits(2);
         nfDec.setMaximumFractionDigits(2);
 
-        numeroVagas(election, printer, nf);
+        // Generating outputs
+        vacanciesNumber(election, printer, nf);
         electedCandidates(election, printer, nf);
         mostVotedCandidates(election, printer, nf);
         harmedCandidates(election, printer, nf);
@@ -31,17 +32,15 @@ public class OutputServices {
         electedByAge(election, printer, nf, nfDec);
         electedByGender(election, printer, nf, nfDec);
         allVoting(election, printer, nf, nfDec);
-
     }
 
-
-    private static void numeroVagas(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
+    //===========================================================================================================//
+    private static void vacanciesNumber(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         printer.println("Número de vagas: " + nf.format(election.electedAmount()));
         printer.println();
-
-        System.out.println("Número de vagas: " + nf.format(election.electedAmount()));
-        System.out.println();
     }
+
+    //===========================================================================================================//
     private static void electedCandidates(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         String category="";
         if(election.getType() == 6)
@@ -50,114 +49,126 @@ public class OutputServices {
             category = "estaduais";
             
         printer.printf("Deputados %s eleitos:\n", category);
-        System.out.printf("Deputados %s eleitos:\n", category);
+
+        String vot;
 
         for(Candidate c: election.electedCandidates()){
-            printer.printf("%s - ", nf.format(c.getPosition()));
-            System.out.printf("%s - ", nf.format(c.getPosition()));
+            printer.printf("%s - ", nf.format(c.getElectedPosition()));
             if(c.getParty().getFederation() != -1)
                 printer.print("*");
-                System.out.print("*");
 
-            printer.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), nf.format(c.getQtVotos()));
-            System.out.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(),
-            c.getParty().getSg(), nf.format(c.getQtVotos()));
+            vot = "voto";
+            vot = pluralSingularFilter(c.getQtVotos(), vot);
+            printer.printf("%s (%s, %s %s)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), nf.format(c.getQtVotos()), vot);
         }
         printer.printf("\n");
-        System.out.print("\n");
     }
+
+    //===========================================================================================================//
     private static void mostVotedCandidates(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         printer.println("Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):");
-        System.out.println("Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):");
+        
+        String vot;
+        
         for(Candidate c: election.getBestCandidates()){
-            printer.printf("%s - ", nf.format(c.getPosition()));
-            System.out.printf("%s - ", nf.format(c.getPosition()));
+            printer.printf("%s - ", nf.format(c.getGeralPosition()));
             if(c.getParty().getFederation() != -1)
                 printer.print("*");
-                System.out.print("*");
 
-            printer.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), nf.format(c.getQtVotos()));
-            System.out.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(),
-            c.getParty().getSg(), nf.format(c.getQtVotos()));
+            vot = "voto";
+            vot = pluralSingularFilter(c.getQtVotos(), vot);
+            printer.printf("%s (%s, %s %s)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), nf.format(c.getQtVotos()), vot);
         }
         printer.print("\n");
-        System.out.print("\n");
     }
+
+    //===========================================================================================================//
     private static void harmedCandidates(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         printer.println("Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:");
         printer.println("(com sua posição no ranking de mais votados)");
-        System.out.println("Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:");
-        System.out.println("(com sua posição no ranking de mais votados)");
+
+        String vot;
 
         for(Candidate c: election.electedIfMajorElection()){
-            printer.printf("%s - ", nf.format(c.getPosition()));
-            System.out.printf("%s - ", nf.format(c.getPosition()));
+            printer.printf("%s - ", nf.format(c.getGeralPosition()));
             if(c.getParty().getFederation() != -1)
                 printer.printf("*");
-                System.out.print("*");
             
-            printer.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), nf.format(c.getQtVotos()));
-            System.out.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(),
-                c.getParty().getSg(), nf.format(c.getQtVotos()));
+            vot = "voto";
+            vot = pluralSingularFilter(c.getQtVotos(), vot);
+            printer.printf("%s (%s, %s %s)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), nf.format(c.getQtVotos()), vot);
         }
         printer.print("\n");
-        System.out.print("\n");
     }
+
+    //===========================================================================================================//
     private static void benefitedCandidates(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         printer.println("Eleitos, que se beneficiaram do sistema proporcional:");
         printer.println("(com sua posição no ranking de mais votados)");
-        System.out.println("Eleitos, que se beneficiaram do sistema proporcional:");
-        System.out.println("(com sua posição no ranking de mais votados)");
+
+        String vot;
+
         for(Candidate c: election.electedByProportional()){
-            printer.printf("%s - ", nf.format(c.getPosition()));
-            System.out.printf("%s - ", nf.format(c.getPosition()));
+            printer.printf("%s - ", nf.format(c.getGeralPosition()));
             if(c.getParty().getFederation() != -1)
                 printer.print("*");
-                System.out.print("*");
-            printer.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), nf.format(c.getQtVotos()));
-            System.out.printf("%s (%s, %s votos)\n", c.getNmUrnaCandidato(),
-                c.getParty().getSg(), nf.format(c.getQtVotos()));
+            
+            vot = "voto";
+            vot = pluralSingularFilter(c.getQtVotos(), vot);
+            printer.printf("%s (%s, %s %s)\n", c.getNmUrnaCandidato(), c.getParty().getSg(), nf.format(c.getQtVotos()), vot);
         }
         printer.print("\n");
-        System.out.print("\n");
     }
+
+    //===========================================================================================================//
     private static void partyVotingAndElectedCandidates(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         printer.println("Votação dos partidos e número de candidatos eleitos:");
-        System.out.println("Votação dos partidos e número de candidatos eleitos:");
-        for(PoliticalParty p: election.getParties()){
-            printer.printf("%s - %s - %s, %s votos (%s nominais e %s de legenda), %s candidatos eleitos\n",
-            nf.format(p.getPosition()), p.getSg(), nf.format(p.getNumber()), nf.format(p.getTotalVotes()),
-            nf.format(p.getNominalVotes()), nf.format(p.getLegendVotes()), nf.format(p.getElectedAmount()));
 
-            System.out.printf("%s - %s - %s, %s votos (%s nominais e %s de legenda), %s candidatos eleitos\n",
-            nf.format(p.getPosition()), p.getSg(), nf.format(p.getNumber()), nf.format(p.getTotalVotes()),
-            nf.format(p.getNominalVotes()), nf.format(p.getLegendVotes()), nf.format(p.getElectedAmount()));
+        String vot, nom, cand, ele;
+
+        for(PoliticalParty p: election.getParties()){
+            vot = "voto";
+            nom = "nominal";
+            cand = "candidato";
+            ele = "eleito";
+
+            vot = pluralSingularFilter(p.getTotalVotes(), vot);
+            nom = pluralSingularFilter(p.getNominalVotes(), nom);
+            cand = pluralSingularFilter(p.getElectedAmount(), cand);
+            ele = pluralSingularFilter(p.getElectedAmount(), ele);
+
+            printer.printf("%s - %s - %s, %s %s (%s %s e %s de legenda), %s %s %s\n",
+            nf.format(p.getPosition()), p.getSg(), nf.format(p.getNumber()), nf.format(p.getTotalVotes()), vot,
+            nf.format(p.getNominalVotes()), nom, nf.format(p.getLegendVotes()), nf.format(p.getElectedAmount()), cand, ele);
         }
         printer.print("\n");
-        System.out.print("\n");
     }
+
+    //===========================================================================================================//
     private static void firstAndLastCandidatesFromParties(Election election, PrintWriter printer, NumberFormat nf) throws IOException {
         printer.println("Primeiro e último colocados de cada partido:");
-        System.out.println("Primeiro e último colocados de cada partido:");
-        for(PoliticalParty p: election.getPartiesOrderedByCandidates()){
-            printer.printf("%s - %s - %s, %s (%d, %s votos) / %s (%d, %s votos)\n",
-            nf.format(p.getPosition()), p.getSg(), nf.format(p.getNumber()), p.mostVotedCandidate().getNmUrnaCandidato(), 
-            p.mostVotedCandidate().getNrCandidato(), nf.format(p.mostVotedCandidate().getQtVotos()),
-            p.leastVotedCandidate().getNmUrnaCandidato(), p.leastVotedCandidate().getNrCandidato(),
-            nf.format(p.leastVotedCandidate().getQtVotos()));
 
-            System.out.printf("%s - %s - %s, %s (%d, %s votos) / %s (%d, %s votos)\n",
+        String mostVot, leastVot;
+
+        for(PoliticalParty p: election.getPartiesOrderedByCandidates()){
+            mostVot = "voto";
+            leastVot = "voto";
+            mostVot = pluralSingularFilter(p.mostVotedCandidate().getQtVotos(), mostVot);
+            leastVot= pluralSingularFilter(p.leastVotedCandidate().getQtVotos(), leastVot);
+
+            printer.printf("%s - %s - %s, %s (%d, %s %s) / %s (%d, %s %s)\n",
             nf.format(p.getPosition()), p.getSg(), nf.format(p.getNumber()), p.mostVotedCandidate().getNmUrnaCandidato(), 
-            p.mostVotedCandidate().getNrCandidato(), nf.format(p.mostVotedCandidate().getQtVotos()),
+            p.mostVotedCandidate().getNrCandidato(), nf.format(p.mostVotedCandidate().getQtVotos()), mostVot,
             p.leastVotedCandidate().getNmUrnaCandidato(), p.leastVotedCandidate().getNrCandidato(),
-            nf.format(p.leastVotedCandidate().getQtVotos()));
+            nf.format(p.leastVotedCandidate().getQtVotos()), leastVot);
         }
         printer.print("\n");
-        System.out.print("\n");
     }
+
+    //===========================================================================================================//
     private static void electedByAge(Election election, PrintWriter printer, NumberFormat nf, NumberFormat nfDec) throws IOException {
         printer.println("Eleitos, por faixa etária (na data da eleição):");
-        System.out.println("Eleitos, por faixa etária (na data da eleição):");
+
         int totalElected = election.electedAmount();
         
         int f1 = election.electedAmountByAge(0, 30);
@@ -173,33 +184,28 @@ public class OutputServices {
         float p5 = ((float)f5 / (float)totalElected)*100;
 
         printer.printf("      Idade < 30: %s (%s%%)\n", nf.format(f1), nfDec.format(p1));
-        printer.printf("30 <= Idade < 40: %s (%s%%)\n", nf.format(f1), nfDec.format(p2));
+        printer.printf("30 <= Idade < 40: %s (%s%%)\n", nf.format(f2), nfDec.format(p2));
         printer.printf("40 <= Idade < 50: %s (%s%%)\n", nf.format(f3), nfDec.format(p3));
         printer.printf("50 <= Idade < 60: %s (%s%%)\n", nf.format(f4), nfDec.format(p4));
         printer.printf("60 <= Idade     : %s (%s%%)\n\n", nf.format(f5), nfDec.format(p5));
-
-        System.out.printf("      Idade < 30: %s (%s%%)\n", nf.format(f1), nfDec.format(p1));
-        System.out.printf("30 <= Idade < 40: %s (%s%%)\n", nf.format(f1), nfDec.format(p2));
-        System.out.printf("40 <= Idade < 50: %s (%s%%)\n", nf.format(f3), nfDec.format(p3));
-        System.out.printf("50 <= Idade < 60: %s (%s%%)\n", nf.format(f4), nfDec.format(p4));
-        System.out.printf("60 <= Idade     : %s (%s%%)\n\n", nf.format(f5), nfDec.format(p5));
     }
+
+    //===========================================================================================================//
     private static void electedByGender(Election election, PrintWriter printer, NumberFormat nf, NumberFormat nfDec) throws IOException {
         int totalElected = election.electedAmount();
         printer.println("Eleitos, por gênero:");
-        System.out.println("Eleitos, por gênero:");
+
         int men = election.electedMen();
         int women = election.electedWomen();
 
         float pmen = ((float)men/(float)totalElected)*100;
         float pwomen = ((float)women/(float)totalElected)*100;
 
-
-        printer.printf("Feminino: %s (%s%%)\n", nf.format(women), nfDec.format(pwomen));
+        printer.printf("Feminino:  %s (%s%%)\n", nf.format(women), nfDec.format(pwomen));
         printer.printf("Masculino: %s (%s%%)\n\n", nf.format(men), nfDec.format(pmen));
-        System.out.printf("Feminino: %s (%s%%)\n", nf.format(women), nfDec.format(pwomen));
-        System.out.printf("Masculino: %s (%s%%)\n\n", nf.format(men), nfDec.format(pmen));
     }
+
+    //===========================================================================================================//
     private static void allVoting(Election election, PrintWriter printer, NumberFormat nf, NumberFormat nfDec) throws IOException {
         int validVotes = election.getLegendVotes() + election.getNominalVotes();
         int nominal = election.getNominalVotes();
@@ -211,16 +217,21 @@ public class OutputServices {
         printer.printf("Total de votos válidos:    %s\n", nf.format(validVotes));
         printer.printf("Total de votos nominais:   %s (%s%%)\n", nf.format(nominal), nfDec.format(pNominal));
         printer.printf("Total de votos de legenda: %s (%s%%)\n", nf.format(legend), nfDec.format(pLegend));
-
-        System.out.printf("Total de votos válidos:    %s\n", nf.format(validVotes));
-        System.out.printf("Total de votos nominais:   %s (%s%%)\n", nf.format(nominal), nfDec.format(pNominal));
-        System.out.printf("Total de votos de legenda: %s (%s%%)\n", nf.format(legend), nfDec.format(pLegend));
     }
 
+    //===========================================================================================================//
+    private static String pluralSingularFilter(int value, String out){
+        if(value > 1){
+            if(out.compareTo("nominal") == 0){
+                return "nominais";
+            }
+            return out.concat("s");
+        }
+        return out;
+    }
 
-
+    //===========================================================================================================//
     public static PrintWriter createWritingBuffer(String filePath) throws IOException {
-
         try {
             PrintWriter printer = new PrintWriter(new FileWriter(filePath, Charset.forName("UTF-8")));
             return printer;
