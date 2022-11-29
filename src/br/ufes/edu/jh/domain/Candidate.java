@@ -11,11 +11,11 @@ public class Candidate implements Comparable<Candidate>{
     private int cdGenero;
     private PoliticalParty party;
     private int qtVotos;
-    private int position;
-    
+    private int electedPosition;
+    private int geralPosition;
+
     public Candidate(int nrCandidato, String nmUrnaCandidato, String nmTipoDestinoVotos, LocalDate dtNascimento,
      boolean cdSitTotTurno, int cdGenero, PoliticalParty party){
-
         this.nrCandidato = nrCandidato;
         this.dtNascimento = dtNascimento;
         this.cdSitTotTurno = cdSitTotTurno;
@@ -30,8 +30,11 @@ public class Candidate implements Comparable<Candidate>{
     public void setQtVotos(int qtVotos) {
         this.qtVotos += qtVotos;
     }
-    public void setPosition(int position) {
-        this.position = position;
+    public void setElectedPosition(int position) {
+        this.electedPosition = position;
+    }
+    public void setGeralPosition(int geralPosition) {
+        this.geralPosition = geralPosition;
     }
     
     //===============Getters================================================//
@@ -50,8 +53,8 @@ public class Candidate implements Comparable<Candidate>{
     public int getCdGenero() {
         return cdGenero;
     }
-    public int getPosition() {
-        return position;
+    public int getElectedPosition() {
+        return electedPosition;
     }
     public PoliticalParty getParty() {
         return party;
@@ -61,6 +64,9 @@ public class Candidate implements Comparable<Candidate>{
     }
     public String getNmTipoDestinoVotos() {
         return nmTipoDestinoVotos;
+    }
+    public int getGeralPosition() {
+        return geralPosition;
     }
     
     //==============Override================================================//
@@ -77,7 +83,7 @@ public class Candidate implements Comparable<Candidate>{
         }
         return 0;
     }
-
+    //==================================//
     @Override
     public String toString() {
         return this.nmUrnaCandidato + " (" + this.party.getSg() + ", " + this.qtVotos + " votos)";
