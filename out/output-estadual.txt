@@ -151,4 +151,3 @@ Masculino: 26 (86,67%)
 Total de votos válidos:    2.077.274
 Total de votos nominais:   1.966.505 (94,67%)
 Total de votos de legenda: 110.769 (5,33%)
-
