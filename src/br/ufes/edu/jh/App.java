@@ -22,7 +22,7 @@ public class App {
         //creates buffers for the target files
         BufferedReader bufferCandidates = InputServices.createReadingBuffer(args[1]);
         BufferedReader bufferVotes = InputServices.createReadingBuffer(args[2]);
-        PrintWriter writeService = OutputServices.createWritingBuffer("../out/saida.txt");
+        //PrintWriter writeService = OutputServices.createWritingBuffer("../out/saida.txt");
 
         //deals with the date format
         String[] date = args[3].split("/");
@@ -35,7 +35,7 @@ public class App {
         InputServices.processCandidatesFile(bufferCandidates, election);
         InputServices.processVotesFile(bufferVotes, election);
 
-        OutputServices.generateReports(election, writeService);
-        writeService.close();
+        OutputServices.generateReports(election);
+        //writeService.close();
     }
 }

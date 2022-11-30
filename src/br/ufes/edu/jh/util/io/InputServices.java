@@ -131,7 +131,9 @@ public class InputServices {
     //==================================================================================================//
     private static void updateInvalidCandidates(Election election, String[] data, PoliticalParty party) throws Exception {
 
-        String[] date = data[42].split("/");
+
+        try {
+            String[] date = data[42].split("/");
         int day = Integer.parseInt(date[0]);
         int month = Integer.parseInt(date[1]);
         int year = Integer.parseInt(date[2]);
@@ -144,6 +146,10 @@ public class InputServices {
         String nmTipoDestinoVotos = data[67];
 
         election.addInvalidCandidate(nrCandidato, nmUrnaCandidato, nmTipoDestinoVotos, dtNsc, situation, cdGenero, party);
+        } catch (Exception e) {
+            return;
+        }
+
     }
 
     //==================================================================================================//
@@ -174,7 +180,7 @@ public class InputServices {
         if(election.getPartiesMap().containsKey(nrVotavel)){
             election.getPartiesMap().get(nrVotavel).setLegendVotes(qtVotos);
             election.setLegendVotes(qtVotos);
-        }       
+        }
     }
 
     //==================================================================================================//
