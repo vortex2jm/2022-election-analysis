@@ -10,97 +10,102 @@ import br.ufes.edu.jh.domain.Election;
 import br.ufes.edu.jh.domain.PoliticalParty;
 
 public class InputServices {
-                                        //======PUBLIC======//
-    //==================================================================================================//
+    // ======PUBLIC======//
+    // ==================================================================================================//
     public static BufferedReader createReadingBuffer(String args) throws Exception {
         try {
-            BufferedReader buffer = new BufferedReader(new FileReader(new File(args),Charset.forName("ISO-8859-1")));
+            BufferedReader buffer = new BufferedReader(new FileReader(new File(args), Charset.forName("ISO-8859-1")));
             return buffer;
         } catch (Exception e) {
             throw e;
         }
     }
 
-    //==================================================================================================//
+    // ==================================================================================================//
     public static void processCandidatesFile(BufferedReader bufferCandidates, Election election)
             throws Exception {
-        
+
         String currentLine;
         String[] currentData;
         PoliticalParty party;
 
-        bufferCandidates.readLine(); // Eliminando linha de legenda
+        bufferCandidates.readLine(); // Eliminando linha de cabeçalho
         while ((currentLine = bufferCandidates.readLine()) != null) {
 
-            // Formatando os dados
-            currentData = dataFormatter(currentLine);
+            // Removendo aspas e separando por ";"
+            currentData = inputFormatter(currentLine);
 
-            // Atualizando lista de candidatos e partidos
+            // Atualizando mapa de partidos
             party = updateParties(election, currentData);
 
-            //caso candidatura válida e candidato de interesse
+            // caso candidatura válida
             if (candidateIsValid(currentData[13], currentData[68], election.getType())) {
                 updateCandidates(election, currentData, party);
                 continue;
             }
-            //caso candidatura inválida mas candidato de interesse(importante para processamento de potenciais votos de legenda)
-            if(election.getType() == Integer.parseInt(currentData[13]) && currentData[67].compareTo("Válido (legenda)") == 0){
+            // caso candidatura inválida mas candidato de interesse(importante para
+            // processamento de potenciais votos de legenda)
+            if (election.getType() == Integer.parseInt(currentData[13])
+                    && currentData[67].compareTo("Válido (legenda)") == 0) {
                 updateInvalidCandidates(election, currentData, party);
             }
         }
     }
 
-    //==================================================================================================//
+    // ==================================================================================================//
     public static void processVotesFile(BufferedReader bufferVotes, Election election) throws Exception {
 
         String currentLine;
         String[] currentData;
 
-        bufferVotes.readLine();//eliminates caption line
+        bufferVotes.readLine(); // Removendo linha de cabeçalho
         while ((currentLine = bufferVotes.readLine()) != null) {
 
-            currentData = dataFormatter(currentLine);
+            // Removendo aspas e separando por ";"
+            currentData = inputFormatter(currentLine);
 
-            if(voteIsValid(currentData[17], election.getType(), currentData[19])){
-                processCandidatesVotes(election, currentData);
+            // Se o voto é válido, é processado
+            if (voteIsValid(currentData[17], election.getType(), currentData[19])) {
+                processValidCandidatesVotes(election, currentData);
                 processInvalidCandidatesVotes(election, currentData);
             }
         }
     }
 
-                                    //========PRIVATE=======//
-    //==================================================================================================//
+    // ========PRIVATE=======//
+    // ==================================================================================================//
     private static boolean candidateIsValid(String cdCargo, String cdDetalhesSituacaoCand, int type) {
         int cdC = Integer.parseInt(cdCargo);
         int cdD = Integer.parseInt(cdDetalhesSituacaoCand);
         if (cdC == type && (cdD == 2 || cdD == 16))
-            return true; 
-        return false;
-    }
-
-    //Overload===========================================================================//
-    private static boolean voteIsValid(String cdCargo, int type, String nrVotavel){
-        int cdC = Integer.parseInt(cdCargo);
-        int nrV = Integer.parseInt(nrVotavel);
-        if(cdC == type && nrV != 95 && nrV != 96 && nrV != 97 && nrV != 98)
             return true;
         return false;
     }
 
-    //==================================================================================================//
+    // Overload===========================================================================//
+    private static boolean voteIsValid(String cdCargo, int type, String nrVotavel) {
+        int cdC = Integer.parseInt(cdCargo);
+        int nrV = Integer.parseInt(nrVotavel);
+        if (cdC == type && nrV != 95 && nrV != 96 && nrV != 97 && nrV != 98)
+            return true;
+        return false;
+    }
+
+    // ==================================================================================================//
     private static PoliticalParty updateParties(Election election, String[] data) {
         int nrPartido = Integer.parseInt(data[27]);
         String sgPartido = data[28];
         int nrFederacao = Integer.parseInt(data[30]);
 
+        // Se o mapa já possui o partido, ele apenas retorna o partido sem criar um novo
         if (election.getPartiesMap().containsKey(nrPartido)) {
             return election.getPartiesMap().get(nrPartido);
         }
         return election.addPartie(nrPartido, sgPartido, nrFederacao);
     }
 
-    //==================================================================================================//
-    private static String[] dataFormatter(String line) {
+    // ==================================================================================================//
+    private static String[] inputFormatter(String line) {
         String[] currentData = line.split(";");
         for (int i = 0; i < currentData.length; i++) {
             currentData[i] = currentData[i].replaceAll("\"", "");
@@ -108,9 +113,9 @@ public class InputServices {
         return currentData;
     }
 
-    //==================================================================================================//
+    // ==================================================================================================//
     private static void updateCandidates(Election election, String[] data, PoliticalParty party) throws Exception {
-
+        // Instanciando uma data
         String[] date = data[42].split("/");
         int day = Integer.parseInt(date[0]);
         int month = Integer.parseInt(date[1]);
@@ -125,13 +130,15 @@ public class InputServices {
 
         election.addCandidate(nrCandidato, nmUrnaCandidato, nmTipoDestinoVotos, dtNsc, situation, cdGenero, party);
     }
-    //==================================================================================================//
-    private static void updateInvalidCandidates(Election election, String[] data, PoliticalParty party) throws Exception {
+
+    // ==================================================================================================//
+    private static void updateInvalidCandidates(Election election, String[] data, PoliticalParty party)
+            throws Exception {
         int nrCandidato = Integer.parseInt(data[16]);
         election.addLegendsCandidatesParties(nrCandidato, party);
     }
 
-    //==================================================================================================//
+    // ==================================================================================================//
     private static boolean isElectedCandidate(String sit) {
         int situation = Integer.parseInt(sit);
         if (situation == 2 || situation == 3)
@@ -139,28 +146,33 @@ public class InputServices {
         return false;
     }
 
-    //==================================================================================================//
-    private static void processCandidatesVotes(Election election, String[] data){
+    // ==================================================================================================//
+    private static void processValidCandidatesVotes(Election election, String[] data) {
         int nrVotavel = Integer.parseInt(data[19]);
         int qtVotos = Integer.parseInt(data[21]);
 
-        if(election.getCandidatesMap().containsKey(nrVotavel)){
+        // Se o número é de um candidato, conta como voto nominal
+        if (election.getCandidatesMap().containsKey(nrVotavel)) {
             election.getCandidatesMap().get(nrVotavel).setQtVotos(qtVotos);
             election.setNominalVotes(qtVotos);
             return;
         }
-        if(election.getPartiesMap().containsKey(nrVotavel)){
+
+        // Se o número é de um partido, conta como voto de legenda
+        if (election.getPartiesMap().containsKey(nrVotavel)) {
             election.getPartiesMap().get(nrVotavel).setLegendVotes(qtVotos);
             election.setLegendVotes(qtVotos);
         }
     }
 
-    //==================================================================================================//
-    private static void processInvalidCandidatesVotes(Election election, String[] data){
+    // ==================================================================================================//
+    private static void processInvalidCandidatesVotes(Election election, String[] data) {
         int nrVotavel = Integer.parseInt(data[19]);
         int qtVotos = Integer.parseInt(data[21]);
 
-        if(election.getLegendsCandidatesParties().containsKey(nrVotavel)){
+        // Se o número do candidato está no mapa de candidatos inválidos, conta como
+        // voto de legenda
+        if (election.getLegendsCandidatesParties().containsKey(nrVotavel)) {
             election.getLegendsCandidatesParties().get(nrVotavel).setLegendVotes(qtVotos);
             election.setLegendVotes(qtVotos);
         }

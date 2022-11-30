@@ -1,7 +1,6 @@
 package br.ufes.edu.jh;
 
 import java.io.BufferedReader;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 
 import br.ufes.edu.jh.domain.Election;
@@ -10,21 +9,18 @@ import br.ufes.edu.jh.util.io.OutputServices;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        //checks the desired processing
+        // checks the desired processing
         int type;
-        if(args[0].compareTo("--estadual") == 0)
+        if (args[0].compareTo("--estadual") == 0)
             type = 7;
-        else if(args[0].compareTo("--federal") == 0)
+        else if (args[0].compareTo("--federal") == 0)
             type = 6;
         else
-            throw new Exception("Argumento inválido"); 
+            throw new Exception("Argumento inválido");
 
-        //creates buffers for the target files
         BufferedReader bufferCandidates = InputServices.createReadingBuffer(args[1]);
         BufferedReader bufferVotes = InputServices.createReadingBuffer(args[2]);
-        //PrintWriter writeService = OutputServices.createWritingBuffer("../out/saida.txt");
 
-        //deals with the date format
         String[] date = args[3].split("/");
         int day = Integer.parseInt(date[0]);
         int month = Integer.parseInt(date[1]);
@@ -36,6 +32,5 @@ public class App {
         InputServices.processVotesFile(bufferVotes, election);
 
         OutputServices.generateReports(election);
-        //writeService.close();
     }
 }

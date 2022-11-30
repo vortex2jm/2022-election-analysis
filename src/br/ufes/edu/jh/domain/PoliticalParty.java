@@ -1,8 +1,9 @@
 package br.ufes.edu.jh.domain;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class PoliticalParty implements Comparable<PoliticalParty>{
+public class PoliticalParty implements Comparable<PoliticalParty> {
 
   private String sg;
   private int legendVotes;
@@ -10,7 +11,7 @@ public class PoliticalParty implements Comparable<PoliticalParty>{
   private int number;
   private List<Candidate> candidatesList;
   private int position;
-  
+
   public PoliticalParty(int number, String sg, int federation) {
     this.number = number;
     this.sg = sg;
@@ -18,91 +19,98 @@ public class PoliticalParty implements Comparable<PoliticalParty>{
     this.candidatesList = new ArrayList<>();
   }
 
-  //======================Getters==================================//
+  // ======================Getters==================================//
   public String getSg() {
     return sg;
   }
+
   public int getLegendVotes() {
     return legendVotes;
   }
+
   public int getFederation() {
     return federation;
   }
+
   public int getNumber() {
     return number;
   }
+
   public int getPosition() {
     return position;
   }
-  public int getTotalVotes(){
+
+  public int getTotalVotes() {
     return this.legendVotes + getNominalVotes();
   }
-  
-  //======================Setters==================================//
+
+  // ======================Setters==================================//
   public void setLegendVotes(int legendVotes) {
     this.legendVotes += legendVotes;
   }
+
   public void setCandidatesList(Candidate candidate) {
     this.candidatesList.add(candidate);
   }
+
   public void setPosition(int position) {
     this.position = position;
   }
 
-  //======================another get methods======================//
+  // ======================another get methods======================//
   public List<Candidate> getCandidatesList() {
     var list = new ArrayList<>(this.candidatesList);
     list.sort(null);
     return list;
   }
 
-  //======================================//
-  public int getNominalVotes(){
-    int total=0;
-    for(Candidate c: candidatesList){
-      total += c.getQtVotos();    
+  // ======================================//
+  public int getNominalVotes() {
+    int total = 0;
+    for (Candidate c : candidatesList) {
+      total += c.getQtVotos();
     }
     return total;
   }
 
-  //======================================//
-  public int getElectedAmount(){
-    int total=0;
-    for(Candidate c: candidatesList){
-      if(c.getCdSitTotTurno())
+  // ======================================//
+  public int getElectedAmount() {
+    int total = 0;
+    for (Candidate c : candidatesList) {
+      if (c.getCdSitTotTurno())
         total++;
     }
     return total;
   }
 
-  //======================================//
-  public Candidate mostVotedCandidate(){
+  // ======================================//
+  public Candidate mostVotedCandidate() {
     var list = new ArrayList<Candidate>(this.candidatesList);
     list.sort(null);
     return list.get(0);
   }
 
-  //======================================//
-  public Candidate leastVotedCandidate(){
+  // ======================================//
+  public Candidate leastVotedCandidate() {
     var list = new ArrayList<Candidate>(this.candidatesList);
     list.sort(null);
     return list.get(list.size() - 1);
   }
 
-  //================Override======================================//
+  // ================Override======================================//
   @Override
   public int compareTo(PoliticalParty arg0) {
     int ownTotal = legendVotes + getNominalVotes();
     int otherTotal = arg0.legendVotes + arg0.getNominalVotes();
 
-    if(ownTotal > otherTotal)
+    if (ownTotal > otherTotal)
       return -1;
-    if(ownTotal < otherTotal)
+    if (ownTotal < otherTotal)
       return 1;
-    if(this.number < arg0.number)
+    if (this.number < arg0.number)
       return -1;
-    if(this.number > arg0.number)
+    if (this.number > arg0.number)
       return 1;
     return 0;
-  }   
+  }
 }
