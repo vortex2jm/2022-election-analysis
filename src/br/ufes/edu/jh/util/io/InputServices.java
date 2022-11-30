@@ -45,7 +45,6 @@ public class InputServices {
             }
             //caso candidatura inválida mas candidato de interesse(importante para processamento de potenciais votos de legenda)
             if(election.getType() == Integer.parseInt(currentData[13]) && currentData[67].compareTo("Válido (legenda)") == 0){
-                System.out.print("IF PROCESS CANDIDATES FILE\n");
                 updateInvalidCandidates(election, currentData, party);
             }
         }
@@ -62,13 +61,8 @@ public class InputServices {
 
             currentData = dataFormatter(currentLine);
 
-            if(candidateIsValid(currentData[17], election.getType(), currentData[19])){
+            if(voteIsValid(currentData[17], election.getType(), currentData[19])){
                 processCandidatesVotes(election, currentData);
-                continue;
-            }
-            //caso candidato inválido, mas de interesse pelos votos de legenda
-            if(election.getType() == Integer.parseInt(currentData[17])){
-                // System.out.print("IF PROCESS VOTES FILE\n");
                 processInvalidCandidatesVotes(election, currentData);
             }
         }
@@ -85,7 +79,7 @@ public class InputServices {
     }
 
     //Overload===========================================================================//
-    private static boolean candidateIsValid(String cdCargo, int type, String nrVotavel){
+    private static boolean voteIsValid(String cdCargo, int type, String nrVotavel){
         int cdC = Integer.parseInt(cdCargo);
         int nrV = Integer.parseInt(nrVotavel);
         if(cdC == type && nrV != 95 && nrV != 96 && nrV != 97 && nrV != 98)
@@ -134,8 +128,6 @@ public class InputServices {
     //==================================================================================================//
     private static void updateInvalidCandidates(Election election, String[] data, PoliticalParty party) throws Exception {
         int nrCandidato = Integer.parseInt(data[16]);
-        System.out.print("IF UPDATE INVALID CANDIDATES \n");
-        System.out.println("NUMERO VOTAVEL DO CANDIDATO ADICIONADO NA LEGENDA: " + nrCandidato);
         election.addLegendsCandidatesParties(nrCandidato, party);
     }
 
@@ -152,18 +144,11 @@ public class InputServices {
         int nrVotavel = Integer.parseInt(data[19]);
         int qtVotos = Integer.parseInt(data[21]);
 
-        
         if(election.getCandidatesMap().containsKey(nrVotavel)){
-            // if(election.getCandidatesMap().get(nrVotavel).getNmTipoDestinoVotos().equals("Válido (legenda)")){
-                // election.getCandidatesMap().get(nrVotavel).getParty().setLegendVotes(qtVotos);
-                // election.setLegendVotes(qtVotos);
-                // return;
-            // }
             election.getCandidatesMap().get(nrVotavel).setQtVotos(qtVotos);
             election.setNominalVotes(qtVotos);
             return;
         }
-
         if(election.getPartiesMap().containsKey(nrVotavel)){
             election.getPartiesMap().get(nrVotavel).setLegendVotes(qtVotos);
             election.setLegendVotes(qtVotos);
@@ -174,14 +159,10 @@ public class InputServices {
     private static void processInvalidCandidatesVotes(Election election, String[] data){
         int nrVotavel = Integer.parseInt(data[19]);
         int qtVotos = Integer.parseInt(data[21]);
-        
-        System.out.println(nrVotavel);
 
         if(election.getLegendsCandidatesParties().containsKey(nrVotavel)){
-
-            System.out.print("IF PROCESS INVALID CANDIDATES VOTES\n");
-
             election.getLegendsCandidatesParties().get(nrVotavel).setLegendVotes(qtVotos);
+            election.setLegendVotes(qtVotos);
         }
     }
 }
