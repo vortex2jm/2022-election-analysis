@@ -12,7 +12,7 @@ public class Election {
     
     private Map<Integer, Candidate> candidates = new HashMap<>();
     private Map<Integer, PoliticalParty> parties = new HashMap<>();
-    private Map<Integer, Candidate> invalidCandidates = new HashMap<>();
+    private Map<Integer, PoliticalParty> legendsCandidatesParties = new HashMap<>();
     
     private int nominalVotes = 0;
     private int legendVotes = 0;
@@ -42,8 +42,8 @@ public class Election {
     public Map<Integer, PoliticalParty> getPartiesMap(){
         return parties;
     }
-    public Map<Integer, Candidate> getInvalidCandidatesMap() {
-        return invalidCandidates;
+    public Map<Integer, PoliticalParty> getLegendsCandidatesParties() {
+        return legendsCandidatesParties;
     }
     public LocalDate getCurrentDate() {
         return currentDate;
@@ -68,18 +68,14 @@ public class Election {
         this.candidates.put(nrCandidato, cand);
         party.setCandidatesList(cand);
     }
-    public void addInvalidCandidate(int nrCandidato, String nmUrnaCandidato, String nmTipoDestinoVotos, LocalDate dtNascimento,
-      boolean cdSitTotTurno, int cdGenero, PoliticalParty party){
-
-        Candidate invalidCand = new Candidate(nrCandidato, nmUrnaCandidato, nmTipoDestinoVotos, dtNascimento, cdSitTotTurno, cdGenero, party);
-        this.invalidCandidates.put(nrCandidato, invalidCand);
-    }
     public PoliticalParty addPartie(int number, String sg, int federation){
         PoliticalParty p = new PoliticalParty(number, sg, federation);
         this.parties.put(number, p);
         return p;
     }
-    
+    public void addLegendsCandidatesParties(int key, PoliticalParty value){
+        this.legendsCandidatesParties.put(key, value);
+    }
     
     //===========================another get methods===============================//
     public int electedAmount(){

@@ -33,19 +33,20 @@ public class InputServices {
         while ((currentLine = bufferCandidates.readLine()) != null) {
 
             // Formatando os dados
-            currentData = InputServices.dataFormatter(currentLine);
+            currentData = dataFormatter(currentLine);
 
             // Atualizando lista de candidatos e partidos
-            party = InputServices.updateParties(election, currentData);
+            party = updateParties(election, currentData);
+
             //caso candidatura válida e candidato de interesse
-            if (InputServices.candidateIsValid(currentData[13], currentData[68], election.getType())) {
-                InputServices.updateCandidates(election, currentData, party);
+            if (candidateIsValid(currentData[13], currentData[68], election.getType())) {
+                updateCandidates(election, currentData, party);
                 continue;
             }
             //caso candidatura inválida mas candidato de interesse(importante para processamento de potenciais votos de legenda)
-            else if(election.getType() == Integer.parseInt(currentData[13])){
-                InputServices.updateInvalidCandidates(election, currentData, party);
-                continue;
+            if(election.getType() == Integer.parseInt(currentData[13]) && currentData[67].compareTo("Válido (legenda)") == 0){
+                System.out.print("IF PROCESS CANDIDATES FILE\n");
+                updateInvalidCandidates(election, currentData, party);
             }
         }
     }
@@ -63,9 +64,11 @@ public class InputServices {
 
             if(candidateIsValid(currentData[17], election.getType(), currentData[19])){
                 processCandidatesVotes(election, currentData);
+                continue;
             }
             //caso candidato inválido, mas de interesse pelos votos de legenda
-            else if(election.getType() == Integer.parseInt(currentData[17])){
+            if(election.getType() == Integer.parseInt(currentData[17])){
+                // System.out.print("IF PROCESS VOTES FILE\n");
                 processInvalidCandidatesVotes(election, currentData);
             }
         }
@@ -130,26 +133,10 @@ public class InputServices {
     }
     //==================================================================================================//
     private static void updateInvalidCandidates(Election election, String[] data, PoliticalParty party) throws Exception {
-
-
-        try {
-            String[] date = data[42].split("/");
-        int day = Integer.parseInt(date[0]);
-        int month = Integer.parseInt(date[1]);
-        int year = Integer.parseInt(date[2]);
-        LocalDate dtNsc = LocalDate.of(year, month, day);
-
-        boolean situation = isElectedCandidate(data[56]);
         int nrCandidato = Integer.parseInt(data[16]);
-        String nmUrnaCandidato = data[18];
-        int cdGenero = Integer.parseInt(data[45]);
-        String nmTipoDestinoVotos = data[67];
-
-        election.addInvalidCandidate(nrCandidato, nmUrnaCandidato, nmTipoDestinoVotos, dtNsc, situation, cdGenero, party);
-        } catch (Exception e) {
-            return;
-        }
-
+        System.out.print("IF UPDATE INVALID CANDIDATES \n");
+        System.out.println("NUMERO VOTAVEL DO CANDIDATO ADICIONADO NA LEGENDA: " + nrCandidato);
+        election.addLegendsCandidatesParties(nrCandidato, party);
     }
 
     //==================================================================================================//
@@ -167,11 +154,11 @@ public class InputServices {
 
         
         if(election.getCandidatesMap().containsKey(nrVotavel)){
-            if(election.getCandidatesMap().get(nrVotavel).getNmTipoDestinoVotos().equals("Válido (legenda)")){
-                election.getCandidatesMap().get(nrVotavel).getParty().setLegendVotes(qtVotos);
-                election.setLegendVotes(qtVotos);
-                return;
-            }
+            // if(election.getCandidatesMap().get(nrVotavel).getNmTipoDestinoVotos().equals("Válido (legenda)")){
+                // election.getCandidatesMap().get(nrVotavel).getParty().setLegendVotes(qtVotos);
+                // election.setLegendVotes(qtVotos);
+                // return;
+            // }
             election.getCandidatesMap().get(nrVotavel).setQtVotos(qtVotos);
             election.setNominalVotes(qtVotos);
             return;
@@ -187,14 +174,14 @@ public class InputServices {
     private static void processInvalidCandidatesVotes(Election election, String[] data){
         int nrVotavel = Integer.parseInt(data[19]);
         int qtVotos = Integer.parseInt(data[21]);
-
         
-        if(election.getInvalidCandidatesMap().containsKey(nrVotavel)){
-            if(election.getInvalidCandidatesMap().get(nrVotavel).getNmTipoDestinoVotos().equals("Válido (legenda)")){
-                election.getInvalidCandidatesMap().get(nrVotavel).getParty().setLegendVotes(qtVotos);
-                election.setLegendVotes(qtVotos);
-                return;
-            }
-        }      
+        System.out.println(nrVotavel);
+
+        if(election.getLegendsCandidatesParties().containsKey(nrVotavel)){
+
+            System.out.print("IF PROCESS INVALID CANDIDATES VOTES\n");
+
+            election.getLegendsCandidatesParties().get(nrVotavel).setLegendVotes(qtVotos);
+        }
     }
 }
