@@ -75,6 +75,17 @@ public class Election {
 
     // ================factory
     // methods========================================================================================================//
+
+
+    /**
+     * @param nrCandidato Numero do candidato na urna
+     * @param nmUrnaCandidato nome do candidato na urna
+     * @param nmTipoDestinoVotos nome de destino de voto - nominal ou legenda
+     * @param dtNascimento data de nascimento do candidato
+     * @param cdSitTotTurno resultado da votação no turno
+     * @param cdGenero código indicador de gênero
+     * @param party partido do candidato
+     */
     public void addCandidate(int nrCandidato, String nmUrnaCandidato, String nmTipoDestinoVotos, LocalDate dtNascimento,
             boolean cdSitTotTurno, int cdGenero, PoliticalParty party) {
 
@@ -84,18 +95,28 @@ public class Election {
         party.setCandidatesList(cand);
     }
 
+    /**
+     * @param number numero do partido
+     * @param sg sigla do partido
+     * @param federation federação do partido
+     * @return
+     */
     public PoliticalParty addPartie(int number, String sg, int federation) {
         PoliticalParty p = new PoliticalParty(number, sg, federation);
         this.parties.put(number, p);
         return p;
     }
 
+    /**
+     * @param key chave para alocação no hashMap, utilizado numero do partido
+     * @param value o partido 
+     */
     public void addLegendsCandidatesParties(int key, PoliticalParty value) {
         this.legendsCandidatesParties.put(key, value);
     }
 
-    // ===========================another get
-    // methods===============================//
+    // ===========================another get methods===============================//
+
     public int electedAmount() {
         int result = 0;
         var c = new ArrayList<Candidate>(candidates.values());
@@ -201,6 +222,12 @@ public class Election {
     }
 
     // =========================================================//
+
+    /**
+     * @param start início do intervalo de interesse de idades
+     * @param end fim do intervalo de interesse de idades
+     * @return
+     */
     public int electedAmountByAge(int start, int end) {
         int total = 0;
         long diff = 0;

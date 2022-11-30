@@ -12,6 +12,13 @@ import br.ufes.edu.jh.domain.PoliticalParty;
 public class InputServices {
     // ======PUBLIC======//
     // ==================================================================================================//
+
+
+    /**
+     * @param args caminho para o arquivo a ser lido
+     * @return um bufferedReader que será utilizado em outras funções
+     * @throws Exception caso o arquivo não seja encontrado
+     */
     public static BufferedReader createReadingBuffer(String args) throws Exception {
         try {
             BufferedReader buffer = new BufferedReader(new FileReader(new File(args), Charset.forName("ISO-8859-1")));
@@ -22,6 +29,11 @@ public class InputServices {
     }
 
     // ==================================================================================================//
+    /**
+     * @param bufferCandidates buffer utilizado para o arquivo de candidatos
+     * @param election a eleição que está sendo analisada
+     * @throws Exception caso algum problema seja encontrado no processamento do arquivo
+     */
     public static void processCandidatesFile(BufferedReader bufferCandidates, Election election)
             throws Exception {
 
@@ -53,6 +65,11 @@ public class InputServices {
     }
 
     // ==================================================================================================//
+    /**
+     * @param bufferVotes buffer utilizado para a leitura do arquivo de votação
+     * @param election a eleição a ser analisada
+     * @throws Exception caso algum problema seja encontrado no processamento
+     */
     public static void processVotesFile(BufferedReader bufferVotes, Election election) throws Exception {
 
         String currentLine;
@@ -74,6 +91,12 @@ public class InputServices {
 
     // ========PRIVATE=======//
     // ==================================================================================================//
+    /**
+     * @param cdCargo codigo do candidato para indicar se é federal ou estadual
+     * @param cdDetalhesSituacaoCand código para indicar se o candidato é válido ou não
+     * @param type tipo de análise da eleição (nível federal ou estadual)
+     * @return booleano indicando se é (ou não) um candidato de interesse
+     */
     private static boolean candidateIsValid(String cdCargo, String cdDetalhesSituacaoCand, int type) {
         int cdC = Integer.parseInt(cdCargo);
         int cdD = Integer.parseInt(cdDetalhesSituacaoCand);
@@ -83,6 +106,12 @@ public class InputServices {
     }
 
     // Overload===========================================================================//
+    /**
+     * @param cdCargo codigo do candidato para indicar se é federal ou estadual
+     * @param type tipo de análise da eleição (nível federal ou estadual)
+     * @param nrVotavel numero do candidato na urna
+     * @return booleano indicando se os votos do candidato são (ou não) de interesse
+     */
     private static boolean voteIsValid(String cdCargo, int type, String nrVotavel) {
         int cdC = Integer.parseInt(cdCargo);
         int nrV = Integer.parseInt(nrVotavel);
@@ -92,6 +121,11 @@ public class InputServices {
     }
 
     // ==================================================================================================//
+    /**
+     * @param election a eleição a ser analisada
+     * @param data linha de dados do arquivo de candidatos
+     * @return um partido político novo
+     */
     private static PoliticalParty updateParties(Election election, String[] data) {
         int nrPartido = Integer.parseInt(data[27]);
         String sgPartido = data[28];
@@ -105,6 +139,10 @@ public class InputServices {
     }
 
     // ==================================================================================================//
+    /**
+     * @param line linha de dados de um arquivo csv do TSE
+     * @return  a linha com os dados prontos para serem utilizados
+     */
     private static String[] inputFormatter(String line) {
         String[] currentData = line.split(";");
         for (int i = 0; i < currentData.length; i++) {
@@ -114,6 +152,12 @@ public class InputServices {
     }
 
     // ==================================================================================================//
+    /**
+     * @param election eleição a ser analisada
+     * @param data linha de dado do arquivo de candidatos
+     * @param party partido do candidato
+     * @throws Exception em caso de dados inválidos
+     */
     private static void updateCandidates(Election election, String[] data, PoliticalParty party) throws Exception {
         // Instanciando uma data
         String[] date = data[42].split("/");
@@ -132,6 +176,12 @@ public class InputServices {
     }
 
     // ==================================================================================================//
+    /**
+     * @param election a eleição a ser analisada
+     * @param data linha de dados do arquivo de candidatos
+     * @param party partido do candidato
+     * @throws Exception em caso de dados inválidos
+     */
     private static void updateInvalidCandidates(Election election, String[] data, PoliticalParty party)
             throws Exception {
         int nrCandidato = Integer.parseInt(data[16]);
@@ -139,6 +189,10 @@ public class InputServices {
     }
 
     // ==================================================================================================//
+    /**
+     * @param sit código de situação do candidato ao fim do turno
+     * @return booleano indicando se candidato foi eleito
+     */
     private static boolean isElectedCandidate(String sit) {
         int situation = Integer.parseInt(sit);
         if (situation == 2 || situation == 3)
@@ -147,6 +201,10 @@ public class InputServices {
     }
 
     // ==================================================================================================//
+    /**
+     * @param election eleição a ser analisada
+     * @param data linha de dados do arquivo de votos
+     */
     private static void processValidCandidatesVotes(Election election, String[] data) {
         int nrVotavel = Integer.parseInt(data[19]);
         int qtVotos = Integer.parseInt(data[21]);
@@ -166,6 +224,10 @@ public class InputServices {
     }
 
     // ==================================================================================================//
+    /**
+     * @param election eleição a ser analisada
+     * @param data linha de dados do arquivo de votos
+     */
     private static void processInvalidCandidatesVotes(Election election, String[] data) {
         int nrVotavel = Integer.parseInt(data[19]);
         int qtVotos = Integer.parseInt(data[21]);
