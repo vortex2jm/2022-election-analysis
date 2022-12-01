@@ -7,6 +7,7 @@ import java.util.Locale;
 import br.ufes.edu.jh.domain.Candidate;
 import br.ufes.edu.jh.domain.Election;
 import br.ufes.edu.jh.domain.PoliticalParty;
+import br.ufes.edu.jh.util.exceptions.ReportsGenerationException;
 
 public class OutputServices {
 
@@ -14,35 +15,38 @@ public class OutputServices {
      * @param election eleição que foi analisada
      * @throws IOException em caso de erros de escrita
      */
-    public static void generateReports(Election election) throws IOException {
-        // Formatting numbers
+    public static void generateReports(Election election) throws ReportsGenerationException {
+        // Formatando os números no padrão brasileiro
         Locale localeBr = Locale.forLanguageTag("pt-BR");
         NumberFormat nf = NumberFormat.getInstance(localeBr);
         NumberFormat nfDec = NumberFormat.getInstance(localeBr);
         nfDec.setMinimumFractionDigits(2);
         nfDec.setMaximumFractionDigits(2);
 
-        // Generating outputs
-        vacanciesNumber(election, nf);
-        electedCandidates(election, nf);
-        mostVotedCandidates(election, nf);
-        harmedCandidates(election, nf);
-        benefitedCandidates(election, nf);
-        partyVotingAndElectedCandidates(election, nf);
-        firstAndLastCandidatesFromParties(election, nf);
-        electedByAge(election, nf, nfDec);
-        electedByGender(election, nf, nfDec);
-        allVoting(election, nf, nfDec);
+        try {
+            // Gerando as saídas
+            vacanciesNumber(election, nf);
+            electedCandidates(election, nf);
+            mostVotedCandidates(election, nf);
+            harmedCandidates(election, nf);
+            benefitedCandidates(election, nf);
+            partyVotingAndElectedCandidates(election, nf);
+            firstAndLastCandidatesFromParties(election, nf);
+            electedByAge(election, nf, nfDec);
+            electedByGender(election, nf, nfDec);
+            allVoting(election, nf, nfDec);
+        } catch (Exception e) {
+            throw new ReportsGenerationException();
+        }
     }
 
     // ===========================================================================================================//
     /**
      * @param election eleição que foi analisada
-     * @param nf o number format que deve ser utilizado
-     * @throws IOException 
+     * @param nf       o number format que deve ser utilizado
+     * @throws IOException
      */
-    private static void vacanciesNumber(Election election, NumberFormat nf) throws IOException {
-
+    private static void vacanciesNumber(Election election, NumberFormat nf) {
         System.out.println("Número de vagas: " + nf.format(election.electedAmount()));
         System.out.println();
     }
@@ -50,7 +54,7 @@ public class OutputServices {
     // ===========================================================================================================//
     /**
      * @param election eleição que foi analisada
-     * @param nf o number format que deve ser utilizado
+     * @param nf       o number format que deve ser utilizado
      * @throws IOException
      */
     private static void electedCandidates(Election election, NumberFormat nf) throws IOException {
@@ -80,7 +84,7 @@ public class OutputServices {
     // ===========================================================================================================//
     /**
      * @param election eleição que foi analisada
-     * @param nf o number format que deve ser utilizado
+     * @param nf       o number format que deve ser utilizado
      * @throws IOException
      */
     private static void mostVotedCandidates(Election election, NumberFormat nf) throws IOException {
@@ -104,7 +108,7 @@ public class OutputServices {
     // ===========================================================================================================//
     /**
      * @param election eleição que foi analisada
-     * @param nf o number format que deve ser utilizado
+     * @param nf       o number format que deve ser utilizado
      * @throws IOException
      */
     private static void harmedCandidates(Election election, NumberFormat nf) throws IOException {
@@ -129,7 +133,7 @@ public class OutputServices {
     // ===========================================================================================================//
     /**
      * @param election eleição que foi analisada
-     * @param nf o number format que deve ser utilizado
+     * @param nf       o number format que deve ser utilizado
      * @throws IOException
      */
     private static void benefitedCandidates(Election election, NumberFormat nf) throws IOException {
@@ -154,7 +158,7 @@ public class OutputServices {
     // ===========================================================================================================//
     /**
      * @param election eleição que foi analisada
-     * @param nf o number format que deve ser utilizado
+     * @param nf       o number format que deve ser utilizado
      * @throws IOException
      */
     private static void partyVotingAndElectedCandidates(Election election, NumberFormat nf) throws IOException {
@@ -184,7 +188,7 @@ public class OutputServices {
     // ===========================================================================================================//
     /**
      * @param election eleição que foi analisada
-     * @param nf o number format que deve ser utilizado
+     * @param nf       o number format que deve ser utilizado
      * @throws IOException
      */
     private static void firstAndLastCandidatesFromParties(Election election, NumberFormat nf) throws IOException {
@@ -211,8 +215,9 @@ public class OutputServices {
     // ===========================================================================================================//
     /**
      * @param election eleição que foi analisada
-     * @param nf o number format que deve ser utilizado
-     * @param nfDec o number format que deve ser utilizado para os números em porcentagem
+     * @param nf       o number format que deve ser utilizado
+     * @param nfDec    o number format que deve ser utilizado para os números em
+     *                 porcentagem
      * @throws IOException
      */
     private static void electedByAge(Election election, NumberFormat nf, NumberFormat nfDec) throws IOException {
@@ -242,8 +247,9 @@ public class OutputServices {
     // ===========================================================================================================//
     /**
      * @param election eleição que foi analisada
-     * @param nf o number format que deve ser utilizado
-     * @param nfDec o number format que deve ser utilizado para os números em porcentagem
+     * @param nf       o number format que deve ser utilizado
+     * @param nfDec    o number format que deve ser utilizado para os números em
+     *                 porcentagem
      * @throws IOException
      */
     private static void electedByGender(Election election, NumberFormat nf, NumberFormat nfDec) throws IOException {
@@ -263,8 +269,9 @@ public class OutputServices {
     // ===========================================================================================================//
     /**
      * @param election eleição que foi analisada
-     * @param nf o number format que deve ser utilizado
-     * @param nfDec o number format que deve ser utilizado para os números em porcentagem
+     * @param nf       o number format que deve ser utilizado
+     * @param nfDec    o number format que deve ser utilizado para os números em
+     *                 porcentagem
      * @throws IOException
      */
     private static void allVoting(Election election, NumberFormat nf, NumberFormat nfDec) throws IOException {
@@ -283,7 +290,7 @@ public class OutputServices {
     // ===========================================================================================================//
     /**
      * @param value valor referencial para decidir singular ou plural
-     * @param out String que deve ser tratada
+     * @param out   String que deve ser tratada
      * @return
      */
     private static String pluralSingularFilter(int value, String out) {
