@@ -113,6 +113,9 @@ public class Election {
 
     // ===========================another get methods===============================//
 
+    /**
+     * @return número de candidatos eleitos
+     */
     public int electedAmount() {
         int result = 0;
         var c = new ArrayList<Candidate>(candidates.values());
@@ -124,6 +127,9 @@ public class Election {
     }
 
     // =========================================================//
+    /**
+     * @return lista com os candidatos eleitos
+     */
     public List<Candidate> electedCandidates() {
         var c = new ArrayList<Candidate>(candidates.values());
         var result = new ArrayList<Candidate>();
@@ -140,6 +146,9 @@ public class Election {
     }
 
     // =========================================================//
+    /**
+     * @return lista de candidatos ordenada em termos de votos
+     */
     public List<Candidate> getAllCandidates() {
         var c = new ArrayList<Candidate>(candidates.values());
         c.sort(null);
@@ -150,6 +159,9 @@ public class Election {
     }
 
     // =========================================================//
+    /**
+     * @return retorna os candidatos mais votados dentro do número de vagas disponíveis
+     */
     public List<Candidate> getBestCandidates() {
         var c = new ArrayList<Candidate>();
         int electedAmount = electedAmount();
@@ -164,6 +176,9 @@ public class Election {
 
     // =========================================================//
     // would be elected if majority rule
+    /**
+     * @return candidatos que seriam eleitos em caso de regra majoritária
+     */
     public List<Candidate> electedIfMajorElection() {
         var mjEl = new ArrayList<Candidate>();
         List<Candidate> electedCandidates = electedCandidates();
@@ -177,7 +192,9 @@ public class Election {
     }
 
     // =========================================================//
-    // benefited on the proportional system
+    /**
+     * @return lista com os candidatos que foram beneficiados pela regra proporcional
+     */
     public List<Candidate> electedByProportional() {
         var elctdProp = new ArrayList<Candidate>();
         List<Candidate> mostVoted = getBestCandidates();
@@ -191,6 +208,9 @@ public class Election {
     }
 
     // =========================================================//
+    /**
+     * @return lista de partidos ordenados a partir da quantidade de votos
+     */
     public List<PoliticalParty> getParties() {
         var p = new ArrayList<PoliticalParty>(parties.values());
         p.sort(null);

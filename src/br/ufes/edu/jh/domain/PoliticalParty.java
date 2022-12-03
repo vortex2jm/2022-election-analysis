@@ -58,6 +58,9 @@ public class PoliticalParty implements Comparable<PoliticalParty> {
   }
 
   // ======================another get methods======================//
+  /**
+   * @return Lista de candidatos do partido, ordenados
+   */
   public List<Candidate> getCandidatesList() {
     var list = new ArrayList<>(this.candidatesList);
     list.sort(null);
@@ -65,6 +68,9 @@ public class PoliticalParty implements Comparable<PoliticalParty> {
   }
 
   // ======================================//
+  /**
+   * @return número de votos nominais
+   */
   public int getNominalVotes() {
     int total = 0;
     for (Candidate c : candidatesList) {
@@ -74,6 +80,9 @@ public class PoliticalParty implements Comparable<PoliticalParty> {
   }
 
   // ======================================//
+  /**
+   * @return a quantidade de candidatos do partido que foram eleitos
+   */
   public int getElectedAmount() {
     int total = 0;
     for (Candidate c : candidatesList) {
@@ -84,6 +93,9 @@ public class PoliticalParty implements Comparable<PoliticalParty> {
   }
 
   // ======================================//
+  /**
+   * @return o candidato mais votado do partido
+   */
   public Candidate mostVotedCandidate() {
     var list = new ArrayList<Candidate>(this.candidatesList);
     list.sort(null);
@@ -91,6 +103,9 @@ public class PoliticalParty implements Comparable<PoliticalParty> {
   }
 
   // ======================================//
+  /**
+   * @return o candidato menos votado do partido
+   */
   public Candidate leastVotedCandidate() {
     var list = new ArrayList<Candidate>(this.candidatesList);
     list.sort(null);
