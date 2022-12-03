@@ -13,16 +13,12 @@ public class Election {
 
     private Map<Integer, Candidate> candidates = new HashMap<>();
     private Map<Integer, PoliticalParty> parties = new HashMap<>();
-
-    // Mapa cuja chave é o número de votação do candidato e o valor é seu respectivo
-    // partido político. Destinado a candidatos inválidos que contabilizam votos de
-    // legenda
     private Map<Integer, PoliticalParty> legendsCandidatesParties = new HashMap<>();
 
     private int nominalVotes = 0;
     private int legendVotes = 0;
-
-    private int type; // estadual ou federal
+    
+    private int type; 
     private LocalDate currentDate;
 
     // Constructor================================//
