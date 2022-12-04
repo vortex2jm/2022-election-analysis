@@ -1,105 +1,164 @@
-@startuml electionAnalysis
+@startuml br.ufes.edu.jh.domain
 
-class Candidate{
-    nrCandidato: int : [1...1]
-    nmUrnaCandidato: String
-    nmTipoDestinoVotos: String
-    dtNascimento: LocalDate
-    cdSitTotTurno: boolean
-    cdGenero: int
-    party: PoliticalParty : [1...1]
-    qtVotos: int
-    electedPosition: int
-    geralPosition: int
 
-    compareTo(Candidate o)
+class App{
+    +{static}main()
 }
 
-class Election{
-    candidates: HashMap<Integer, Candidates>
-    parties: HashMap<Integer, PoliticalParty>
-    legendsCandidatesParties: HashMap<Integer,PoliticalParty>
-    nominalVotes: int
-    legendVotes: int
-    type: int
-    currentDate: LocalDate
+package "domain" #DDDDDD{
+    class Candidate{
+    ..simple getters..
+    ..simple setters..
 
-    addCandidate()
-    addPartie(int number, String sg, int federation)
-    addLegendsCandidatesParties(int key, PoliticalParty value)
-    electedAmount()
-    electedCandidates()
-    getAllCandidates()
-    getBestCandidates()
-    electedIfMajorElection()
-    electedByProportional()
-    getParties()
-    getPartiesOrderedByCandidates()
-    electedAmountByAge(int start, int end)
-    electedMen()
-    electedWomen()
+    -nrCandidato: int : [1..1]
+    -nmUrnaCandidato: String
+    -nmTipoDestinoVotos: String
+    -dtNascimento: LocalDate
+    -cdSitTotTurno: boolean
+    -cdGenero: int
+    -party: PoliticalParty : [1..1]
+    -qtVotos: int
+    -electedPosition: int
+    -geralPosition: int
+
+    +compareTo(Candidate o)
+    }
+
+    class Election{
+        ..simple getters..
+        ..simple setters..
+
+        -candidates: HashMap<Integer, Candidates> : [0..*]
+        -parties: HashMap<Integer, PoliticalParty> : [0..*]
+        -legendsCandidatesParties: HashMap<Integer,PoliticalParty> : [0..*]
+        -nominalVotes: int
+        -legendVotes: int
+        -type: int
+        -currentDate: LocalDate
+
+        +addCandidate()
+        +addPartie(int number, String sg, int federation)
+        +addLegendsCandidatesParties(int key, PoliticalParty value)
+        +electedAmount()
+        +electedCandidates()
+        +getAllCandidates()
+        +getBestCandidates()
+        +electedIfMajorElection()
+        +electedByProportional()
+        +getParties()
+        +getPartiesOrderedByCandidates()
+        +electedAmountByAge(int start, int end)
+        +electedMen()
+        +electedWomen()
+    }
+
+    class PoliticalParty{
+        ..simple getters..
+        ..simple setters..
+
+        -sg: String
+        -legendVotes: int
+        -federation: int
+        -number: int : [1..1]
+        -candidatesList: List<Candidate>
+        -position: int
+
+        +getCandidatesList()
+        +getNominalVotes()
+        +getElectedAmount()
+        +mostVotedCandidate()
+        +leastVotedCandidate()
+        +compareTo(PoliticalParty arg0)
+    }
 }
 
-class PoliticalParty{
-    sg: String
-    legendVotes: int
-    federation: int
-    number: int : [1...1]
-    candidatesList: List<Candidate>
-    position: int
-
-    getCandidatesList()
-    getNominalVotes()
-    getElectedAmount()
-    mostVotedCandidate()
-    leastVotedCandidate()
-    compareTo(PoliticalParty arg0)
+package "util.comparators" #DDDDDD{
+    class PartyComparatorByCandidate{
+    +compare(PoliticalParty arg0, PoliticalParty arg1)
+    }
 }
 
-class InputServices{
-    createReadingBuffer(String args)
-    processCandidatesFile(BufferedReader bufferCandidates, Election election)
-    processVotesFile(BufferedReader bufferVotes, Election election)
-    candidateIsValid(String cdCargo, String cdDetalhesSituacaoCand, int type)
-    voteIsValid(String cdCargo, int type, String nrVotavel)
-    updateParties(Election election, String[] data)
-    inputFormatter(String line)
-    updateCandidates(Election election, String[] data, PoliticalParty party)
-    updateInvalidCandidates(Election election, String[] data, PoliticalParty party)
-    isElectedCandidate(String sit)
-    processValidCandidatesVotes(Election election, String[] data)
-    processInvalidCandidatesVotes(Election election, String[] data)
+package "util.io" #DDDDDD{
+    class OutputServices{
+        +{static}generateReports(Election election)
+        -{static}vacanciesNumber(Election election, NumberFormat nf)
+        -{static}electedCandidates(Election election, NumberFormat nf)
+        -{static}mostVotedCandidates(Election election, NumberFormat nf)
+        -{static}harmedCandidates(Election election, NumberFormat nf)
+        -{static}benefitedCandidates(Election election, NumberFormat nf)
+        -{static}partyVotingAndElectedCandidates(Election election, NumberFormat nf)
+        -{static}firstAndLastCandidatesFromParties(Election election, NumberFormat nf)
+        -{static}electedByAge(Election election, NumberFormat nf, NumberFormat nfDec)
+        -{static}electedByGender(Election election, NumberFormat nf, NumberFormat nfDec)
+        -{static}allVoting(Election election, NumberFormat nf, NumberFormat nfDec)
+        -{static}pluralSingularFilter(int value, String out)
+    }
 }
 
-class OutputServices{
-    generateReports(Election election)
-    vacanciesNumber(Election election, NumberFormat nf)
-    electedCandidates(Election election, NumberFormat nf)
-    mostVotedCandidates(Election election, NumberFormat nf)
-    harmedCandidates(Election election, NumberFormat nf)
-    benefitedCandidates(Election election, NumberFormat nf)
-    partyVotingAndElectedCandidates(Election election, NumberFormat nf)
-    firstAndLastCandidatesFromParties(Election election, NumberFormat nf)
-    electedByAge(Election election, NumberFormat nf, NumberFormat nfDec)
-    electedByGender(Election election, NumberFormat nf, NumberFormat nfDec)
-    allVoting(Election election, NumberFormat nf, NumberFormat nfDec)
-    pluralSingularFilter(int value, String out)
+package "util.io " #DDDDDD{
+    class InputServices{
+        +{static}createReadingBuffer(String args)
+        +{static}processCandidatesFile(BufferedReader bufferCandidates, Election election)
+        +{static}processVotesFile(BufferedReader bufferVotes, Election election)
+        -{static}candidateIsValid(String cdCargo, String cdDetalhesSituacaoCand, int type)
+        -{static}voteIsValid(String cdCargo, int type, String nrVotavel)
+        -{static}updateParties(Election election, String[] data)
+        -{static}inputFormatter(String line)
+        -{static}updateCandidates(Election election, String[] data, PoliticalParty party)
+        -{static}updateInvalidCandidates(Election election, String[] data, PoliticalParty party)
+        -{static}isElectedCandidate(String sit)
+        -{static}processValidCandidatesVotes(Election election, String[] data)
+        -{static}processInvalidCandidatesVotes(Election election, String[] data)
+    }
 }
 
-class PartyComparatorByCandidate{
-    compare(PoliticalParty arg0, PoliticalParty arg1)
+package "util.exceptions" #DDDDDD{
+    class CandidatesFileInputException
 }
 
-class App
+package "util.exceptions " #DDDDDD{
+    class VotesFileInputException
+}
 
-Candidate --|> PoliticalParty
-PoliticalParty -|> Election
-PartyComparatorByCandidate --|> Election
+package "util.exceptions  " #DDDDDD{
+    class ElectionDateException
+}
 
-Election --|> InputServices
-Election --|> OutputServices
+package "util.exceptions   " #DDDDDD{
+    class ReportsGenerationException
+}
 
-InputServices --|> App
-OutputServices --|> App
+package "util.exceptions    " #DDDDDD{
+    class VotesFileProcessException
+}
+
+package " util.exceptions" #DDDDDD{
+    class CandidatesFileProcessException
+}
+
+App <.down. Election: <<Instantiate>>
+
+Election  <.left. OutputServices: <<use>>
+Election  <.right.InputServices: <<use>>
+
+App <.. InputServices: <<use>>
+App  <.. OutputServices: <<use>>
+
+Election o-- PoliticalParty
+Election o-- Candidate
+
+Candidate <-right-> PoliticalParty
+
+PoliticalParty <-down- PartyComparatorByCandidate
+
+App <-right- CandidatesFileInputException
+App <-left- VotesFileInputException
+App <-up- ElectionDateException
+
+OutputServices <-down- ReportsGenerationException
+
+InputServices  <-down- VotesFileProcessException
+InputServices <-up- CandidatesFileProcessException
+
 
 @enduml
