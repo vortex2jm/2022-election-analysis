@@ -136,13 +136,14 @@ package " util.exceptions" #DDDDDD{
     class CandidatesFileProcessException
 }
 
+
+
 App <.down. Election: <<Instantiate>>
-
-Election  <.left. OutputServices: <<use>>
-Election  <.right.InputServices: <<use>>
-
 App <.. InputServices: <<use>>
 App  <.. OutputServices: <<use>>
+App <-right- CandidatesFileInputException
+App <-left- VotesFileInputException
+App <-up- ElectionDateException
 
 Election o-- PoliticalParty
 Election o-- Candidate
@@ -151,14 +152,9 @@ Candidate <-right-> PoliticalParty
 
 PoliticalParty <-down- PartyComparatorByCandidate
 
-App <-right- CandidatesFileInputException
-App <-left- VotesFileInputException
-App <-up- ElectionDateException
-
 OutputServices <-down- ReportsGenerationException
 
 InputServices  <-down- VotesFileProcessException
 InputServices <-up- CandidatesFileProcessException
-
 
 @enduml
