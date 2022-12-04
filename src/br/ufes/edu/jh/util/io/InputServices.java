@@ -17,9 +17,11 @@ public class InputServices {
     // ======PUBLIC======//
     // ==================================================================================================//
     /**
-     * @param args caminho para o arquivo a ser lido
+     * Função para criar um buffer a partir de um arquivo
+     * 
+     * @param args: caminho para o arquivo a ser lido
      * @return um bufferedReader que será utilizado em outras funções
-     * @throws Exception caso o arquivo não seja encontrado
+     * @throws IOException: caso o arquivo não seja encontrado
      */
     public static BufferedReader createReadingBuffer(String args) throws IOException {
         try {
@@ -32,10 +34,13 @@ public class InputServices {
 
     // ==================================================================================================//
     /**
-     * @param bufferCandidates buffer utilizado para o arquivo de candidatos
-     * @param election         a eleição que está sendo analisada
-     * @throws Exception caso algum problema seja encontrado no processamento do
-     *                   arquivo
+     * Função que processa o arquivo de candidatos
+     * 
+     * @param bufferCandidates: buffer utilizado para o arquivo de candidatos
+     * @param election:         a eleição que está sendo analisada
+     * @throws CandidatesFileProcessException: Caso algum problema seja encontrado
+     *                                         no processamento do
+     *                                         arquivo de candidatos
      */
     public static void processCandidatesFile(BufferedReader bufferCandidates, Election election)
             throws CandidatesFileProcessException {
@@ -77,10 +82,13 @@ public class InputServices {
 
     // ==================================================================================================//
     /**
-     * @param bufferVotes buffer utilizado para a leitura do arquivo de votação
-     * @param election    a eleição a ser analisada
-     * @throws IOException
-     * @throws Exception   caso algum problema seja encontrado no processamento
+     * Função para processar o arquivo de votos
+     * 
+     * @param bufferVotes: buffer utilizado para a leitura do arquivo de votação
+     * @param election:    a eleição a ser analisada
+     * @throws VotesFileProcessException: Caso algum problema seja encontrado no
+     *                                    processamento do
+     *                                    arquivo de votos
      */
     public static void processVotesFile(BufferedReader bufferVotes, Election election)
             throws VotesFileProcessException {
@@ -112,14 +120,14 @@ public class InputServices {
 
     // ========PRIVATE=======//
     // ==================================================================================================//
-    /**
-     * @param cdCargo                codigo do candidato para indicar se é federal
-     *                               ou estadual
-     * @param cdDetalhesSituacaoCand código para indicar se o candidato é válido ou
-     *                               não
-     * @param type                   tipo de análise da eleição (nível federal ou
-     *                               estadual)
+    /** Função que verifica se um candidato é valido
+     * @param cdCargo:                Código para indicar se é deputado federal ou
+     *                                estadual
+     * @param cdDetalhesSituacaoCand: Código para indicar se o candidato é válido ou
+     *                                não
+     * @param type:                   Tipo da eleição - estaudal/federal
      * @return booleano indicando se é (ou não) um candidato de interesse
+     * @throws NumberFormatException: Caso aconteça uma exceção no parse
      */
     private static boolean candidateIsValid(String cdCargo, String cdDetalhesSituacaoCand, int type)
             throws NumberFormatException {
@@ -139,11 +147,12 @@ public class InputServices {
     }
 
     // ===========================================================================//
-    /**
-     * @param cdCargo   codigo do candidato para indicar se é federal ou estadual
-     * @param type      tipo de análise da eleição (nível federal ou estadual)
-     * @param nrVotavel numero do candidato na urna
+    /** Função que verifica se um voto é válido
+     * @param cdCargo:   codigo do candidato para indicar se é federal ou estadual
+     * @param type:      tipo de análise da eleição (nível federal ou estadual)
+     * @param nrVotavel: numero do candidato na urna
      * @return booleano indicando se os votos do candidato são (ou não) de interesse
+     * @throws NumberFormatException: Caso aconteça uma exceção no parse
      */
     private static boolean voteIsValid(String cdCargo, int type, String nrVotavel) throws NumberFormatException {
         int cdC, nrV;
@@ -163,10 +172,11 @@ public class InputServices {
     }
 
     // ==================================================================================================//
-    /**
-     * @param election a eleição a ser analisada
-     * @param data     linha de dados do arquivo de candidatos
+    /** Função que atualiza os partidos da eleição a partir do arquivo de candidatos
+     * @param election: a eleição a ser analisada
+     * @param data:     linha de dados do arquivo de candidatos
      * @return um partido político novo
+     * @throws NumberFormatException: Caso aconteça uma exceção no parse
      */
     private static PoliticalParty updateParties(Election election, String[] data) throws NumberFormatException {
         int nrPartido, nrFederacao;
@@ -188,8 +198,8 @@ public class InputServices {
     }
 
     // ==================================================================================================//
-    /**
-     * @param line linha de dados de um arquivo csv do TSE
+    /** Função que remove aspas e separa um arquivo csv a partir do caracter ";"
+     * @param line: linha de dados de um arquivo csv do TSE
      * @return a linha com os dados prontos para serem utilizados
      */
     private static String[] inputFormatter(String line) {
@@ -201,10 +211,11 @@ public class InputServices {
     }
 
     // ==================================================================================================//
-    /**
-     * @param election eleição a ser analisada
-     * @param data     linha de dado do arquivo de candidatos
-     * @param party    partido do candidato
+    /** Função que atualiza os candidatos da eleição a partir do arquivo de candidatos
+     * @param election: eleição a ser analisada
+     * @param data:     linha de dado do arquivo de candidatos
+     * @param party:    partido do candidato
+     * @throws NumberFormatException: Caso aconteça uma exceção no parse
      */
     private static void updateCandidates(Election election, String[] data, PoliticalParty party)
             throws NumberFormatException {
@@ -237,10 +248,11 @@ public class InputServices {
     }
 
     // ==================================================================================================//
-    /**
-     * @param election a eleição a ser analisada
-     * @param data     linha de dados do arquivo de candidatos
-     * @param party    partido do candidato
+    /** Função que atualiza os candidatos inválidos da eleição
+     * @param election: a eleição a ser analisada
+     * @param data:     linha de dados do arquivo de candidatos
+     * @param party:    partido do candidato
+     * @throws NumberFormatException: Caso aconteça uma exceção no parse
      */
     private static void updateInvalidCandidates(Election election, String[] data, PoliticalParty party)
             throws NumberFormatException {
@@ -257,9 +269,10 @@ public class InputServices {
     }
 
     // ==================================================================================================//
-    /**
-     * @param sit código de situação do candidato ao fim do turno
+    /** Função que verifica se o candidato foi eleito
+     * @param sit: código de situação do candidato ao fim do turno
      * @return booleano indicando se candidato foi eleito
+     * @throws NumberFormatException: Caso aconteça uma exceção no parse
      */
     private static boolean isElectedCandidate(String sit) throws NumberFormatException {
         int situation;
@@ -277,9 +290,10 @@ public class InputServices {
     }
 
     // ==================================================================================================//
-    /**
-     * @param election eleição a ser analisada
-     * @param data     linha de dados do arquivo de votos
+    /** Função para processar os votos de candidatos válidos
+     * @param election: eleição a ser analisada
+     * @param data:     linha de dados do arquivo de votos
+     * @throws NumberFormatException: Caso aconteça uma exceção no parse
      */
     private static void processValidCandidatesVotes(Election election, String[] data) throws NumberFormatException {
         int nrVotavel, qtVotos;
@@ -307,9 +321,10 @@ public class InputServices {
     }
 
     // ==================================================================================================//
-    /**
-     * @param election eleição a ser analisada
-     * @param data     linha de dados do arquivo de votos
+    /** Função para processar votos de candidatos inválidos
+     * @param election: eleição a ser analisada
+     * @param data:     linha de dados do arquivo de votos
+     * @throws NumberFormatException: Caso aconteça uma exceção no parse
      */
     private static void processInvalidCandidatesVotes(Election election, String[] data) throws NumberFormatException {
         int nrVotavel, qtVotos;

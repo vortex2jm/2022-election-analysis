@@ -17,8 +17,8 @@ public class Election {
 
     private int nominalVotes = 0;
     private int legendVotes = 0;
-    
-    private int type; 
+
+    private int type;
     private LocalDate currentDate;
 
     // Constructor================================//
@@ -72,15 +72,16 @@ public class Election {
     // ================factory
     // methods========================================================================================================//
 
-
     /**
-     * @param nrCandidato Numero do candidato na urna
-     * @param nmUrnaCandidato nome do candidato na urna
+     * Função factory. Adiciona um candidato à eleição
+     * 
+     * @param nrCandidato        Numero do candidato na urna
+     * @param nmUrnaCandidato    nome do candidato na urna
      * @param nmTipoDestinoVotos nome de destino de voto - nominal ou legenda
-     * @param dtNascimento data de nascimento do candidato
-     * @param cdSitTotTurno resultado da votação no turno
-     * @param cdGenero código indicador de gênero
-     * @param party partido do candidato
+     * @param dtNascimento       data de nascimento do candidato
+     * @param cdSitTotTurno      resultado da votação no turno
+     * @param cdGenero           código indicador de gênero
+     * @param party              partido do candidato
      */
     public void addCandidate(int nrCandidato, String nmUrnaCandidato, String nmTipoDestinoVotos, LocalDate dtNascimento,
             boolean cdSitTotTurno, int cdGenero, PoliticalParty party) {
@@ -92,10 +93,12 @@ public class Election {
     }
 
     /**
-     * @param number numero do partido
-     * @param sg sigla do partido
+     * Função factory. Adiciona um partido político à eleição
+     * 
+     * @param number     numero do partido
+     * @param sg         sigla do partido
      * @param federation federação do partido
-     * @return
+     * @return Retorna o partido político criado
      */
     public PoliticalParty addPartie(int number, String sg, int federation) {
         PoliticalParty p = new PoliticalParty(number, sg, federation);
@@ -104,14 +107,18 @@ public class Election {
     }
 
     /**
-     * @param key chave para alocação no hashMap, utilizado numero do partido
-     * @param value o partido 
+     * Função factory. Adiciona um candidato inválido, porém com voto de legenda
+     * válido À eleição
+     * 
+     * @param key   chave para alocação no hashMap, utilizado numero do partido
+     * @param value o partido
      */
     public void addLegendsCandidatesParties(int key, PoliticalParty value) {
         this.legendsCandidatesParties.put(key, value);
     }
 
-    // ===========================another get methods===============================//
+    // ===========================another get
+    // methods===============================//
 
     /**
      * @return número de candidatos eleitos
@@ -160,7 +167,8 @@ public class Election {
 
     // =========================================================//
     /**
-     * @return retorna os candidatos mais votados dentro do número de vagas disponíveis
+     * @return retorna os candidatos mais votados dentro do número de vagas
+     *         disponíveis
      */
     public List<Candidate> getBestCandidates() {
         var c = new ArrayList<Candidate>();
@@ -175,7 +183,6 @@ public class Election {
     }
 
     // =========================================================//
-    // would be elected if majority rule
     /**
      * @return candidatos que seriam eleitos em caso de regra majoritária
      */
@@ -193,7 +200,8 @@ public class Election {
 
     // =========================================================//
     /**
-     * @return lista com os candidatos que foram beneficiados pela regra proporcional
+     * @return lista com os candidatos que foram beneficiados pela regra
+     *         proporcional
      */
     public List<Candidate> electedByProportional() {
         var elctdProp = new ArrayList<Candidate>();
@@ -221,6 +229,9 @@ public class Election {
     }
 
     // =========================================================//
+    /**
+     * @return Partidos ordenados a partir dos atributos de seus candidatos
+     */
     public List<PoliticalParty> getPartiesOrderedByCandidates() {
         var pList = new ArrayList<PoliticalParty>();
 
@@ -241,8 +252,8 @@ public class Election {
 
     /**
      * @param start início do intervalo de interesse de idades
-     * @param end fim do intervalo de interesse de idades
-     * @return
+     * @param end   fim do intervalo de interesse de idades
+     * @return quantidade de deputados eleitos neste intervalo de idade
      */
     public int electedAmountByAge(int start, int end) {
         int total = 0;
@@ -256,6 +267,9 @@ public class Election {
     }
 
     // =========================================================//
+    /**
+     * @return Quantidade de homens eleitos
+     */
     public int electedMen() {
         int total = 0;
         for (Candidate c : electedCandidates()) {
@@ -266,6 +280,9 @@ public class Election {
     }
 
     // =========================================================//
+    /**
+     * @return Quantidade de mulheres eleitas
+     */
     public int electedWomen() {
         int total = 0;
         for (Candidate c : electedCandidates()) {
